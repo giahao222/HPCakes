@@ -1,0 +1,158 @@
+﻿@model IEnumerable<HPCakes.Models.news>
+
+<section class="latest_news_area gray_bg p_100">
+    <div class="container">
+        <div class="main_title">
+            <h2>Latest Blog</h2>
+            <h5>an turn into your instructor your helper, your </h5>
+        </div>
+        <div class="row latest_news_inner">
+            @foreach (var item in Model)
+            {
+                if (item.order == 1)
+                {
+                    <div class="col-lg-4 col-md-6">
+                        <div class="l_news_image">
+                            <div class="l_news_img">
+                                <img class="~/img-fluid" src="~/img/@item.img" alt="" style="min-height: 400px">
+                            </div>
+                            <div class="l_news_hover">
+                                <a href="#"><h5>Oct 15, 2016</h5></a>
+                                <a href="#"><h4>@item.name</h4></a>
+                            </div>
+                        </div>
+                    </div>
+                }
+                else if (item.order == 2)
+                {
+                    <div class="col-lg-4 col-md-6">
+                        <div class="l_news_item">
+                            <div class="l_news_img">
+                                <img class="~/img-fluid" src="~/img/@item.img" alt="" style="max-height: 200px">
+                            </div>
+                            <div class="l_news_text">
+                                <a href="#"><h5>Oct 15, 2016</h5></a>
+                                <a href="#"><h4>@item.name</h4></a>
+                                <p class="truncated">@item.detail</p>
+                            </div>
+                        </div>
+                    </div>
+                }
+                else if (item.order == 3)
+                {
+                    <div class="col-lg-4 col-md-6">
+                        <div class="l_news_item">
+                            <div class="l_news_img">
+                                <img class="~/img-fluid" src="~/img/@item.img" alt="" style="max-height: 200px">
+                            </div>
+                            <div class="l_news_text">
+                                <a href="#"><h5>Oct 15, 2016</h5></a>
+                                <a href="#"><h4>@item.name</h4></a>
+                                <p class="truncated">@item.detail</p>
+                            </div>
+                        </div>
+
+                    </div>
+                }
+            }
+        </div>
+    </div>
+</section>
+
+<style>
+    .l_news_image img,
+    .l_news_item img {
+        width: 100%; /* Đảm bảo hình ảnh điền đầy khung */
+        height: auto; /* Đảm bảo tỷ lệ khung */
+    }
+
+</style>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        var elements = document.getElementsByClassName("truncated");
+        var maxWordCount = 20; // Số từ tối đa
+        var maxCharCount = 150; // Số ký tự tối đa
+
+        for (var i = 0; i < elements.length; i++) {
+            var element = elements[i];
+            var text = element.textContent.trim();
+            var words = text.split(" ");
+            var charCount = text.length;
+
+            if (charCount > maxCharCount) {
+                // Kiểm tra nếu vượt quá ngưỡng ký tự tối đa
+                text = text.substring(0, maxCharCount).trim();
+                var lastSpaceIndex = text.lastIndexOf(" ");
+                if (lastSpaceIndex !== -1) {
+                    text = text.substring(0, lastSpaceIndex);
+                }
+                element.textContent = text + "...";
+            } else if (words.length > maxWordCount) {
+                // Kiểm tra nếu vượt quá ngưỡng từ tối đa
+                text = words.slice(0, maxWordCount).join(" ");
+                element.textContent = text + "...";
+            }
+        }
+    });
+</script>
+@*
+@model IEnumerable<HPCakes.Models.news>
+
+<section class="latest_news_area gray_bg p_100">
+    <div class="container">
+        <div class="main_title">
+            <h2>Latest Blog</h2>
+            <h5>Turn into your instructor your helper, your</h5>
+        </div>
+        <div class="row latest_news_inner">
+            @foreach (var item in Model)
+            {
+                if (item.order == 1)
+                {
+                    <div class="col-lg-4 col-md-6">
+                        <div class="l_news_image">
+                            <div class="l_news_img">
+                                <img class="img-fluid" src="@item.img" alt="">
+                            </div>
+                            <div class="l_news_hover">
+                                <a href="#"><h5>@item.datebegin</h5></a>
+                                <a href="#"><h4>@item.name</h4></a>
+                            </div>
+                        </div>
+                    </div>
+                }
+                else if (item.order == 2)
+                {
+                    <div class="col-lg-6 col-md-6">
+                        <div class="l_news_item">
+                            <div class="l_news_img">
+                                <img class="img-fluid" src="@item.img" alt="">
+                            </div>
+                            <div class="l_news_text">
+                                <a href="#"><h5>@item.datebegin</h5></a>
+                                <a href="#"><h4>@item.name</h4></a>
+                                <p>@item.description</p>
+                            </div>
+                        </div>
+                    </div>
+                }
+                else if (item.order == 3)
+                {
+                    <div class="col-lg-12">
+                        <div class="l_news_item">
+                            <div class="l_news_img">
+                                <img class="img-fluid" src="@item.img" alt="">
+                            </div>
+                            <div class="l_news_text">
+                                <a href="#"><h5>@item.datebegin</h5></a>
+                                <a href="#"><h4>@item.name</h4></a>
+                                <p>@item.description</p>
+                            </div>
+                        </div>
+                    </div>
+                }
+                // Add more conditions for other types if needed
+            }
+        </div>
+    </div>
+</section>*@

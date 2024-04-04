@@ -1,0 +1,36 @@
+﻿@model IEnumerable<HPCakes.Models.team>
+
+<section class="our_chef_area p_100">
+    <div class="container">
+        <div class="row our_chef_inner">
+            <div class="col-lg-3">
+                <div class="chef_text_item">
+                    <div class="main_title">
+                        <h2>Our Chefs</h2>
+                        <p>Lorem ipsum dolor sit amet, cons ectetur elit. Vestibulum nec odios Suspe ndisse cursus mal suada faci lisis. Lorem ipsum dolor sit ametion.</p>
+                    </div>
+                </div>
+            </div>
+            @foreach (var item in Model.Take(3))
+            {
+                <div class="col-lg-3 col-6">
+                    <div class="chef_item">
+                        <div class="chef_img">
+                            <img class="img-fluid" src="~/img/@item.img" alt="">
+                            <ul class="list_style">
+                                <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                                <li><a href="#"><i class="fa fa-linkedin-square"></i></a></li>
+                                <li><a href="@item.facebook"><i class="fa fa-facebook-square"></i></a></li>
+                                <li><a href="#"><i class="fa fa-instagram"></i></a></li>
+                            </ul>
+                        </div>
+                        <a href="#"><h4>@item.name</h4></a>
+                        <h5>@item.job_title</h5>
+                    </div>
+                </div>
+            }
+            
+        </div>
+    </div>
+</section>
+

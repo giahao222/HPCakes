@@ -45,10 +45,18 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -120,9 +128,44 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\AboutUsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\TempController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Models\category.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\contact_us.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\menu.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Model1.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Model1.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Model1.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Model1.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Model1.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\news.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\product.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\team.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -143,15 +186,220 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\bootstrap.rtl.css" />
     <Content Include="Content\bootstrap.rtl.min.css" />
+    <Content Include="css\bootstrap.min.css" />
+    <Content Include="css\font-awesome.min.css" />
+    <Content Include="css\responsive.css" />
+    <Content Include="css\style.css" />
     <Content Include="favicon.ico" />
+    <Content Include="fonts\fontawesome-webfont3e6e.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="img\banh-cuoi\1.jpg" />
+    <Content Include="img\banh-cuoi\10.jpg" />
+    <Content Include="img\banh-cuoi\2.jpg" />
+    <Content Include="img\banh-cuoi\3.jpg" />
+    <Content Include="img\banh-cuoi\4.jpg" />
+    <Content Include="img\banh-cuoi\5.jpg" />
+    <Content Include="img\banh-cuoi\6.jpg" />
+    <Content Include="img\banh-cuoi\7.jpg" />
+    <Content Include="img\banh-cuoi\8.jpg" />
+    <Content Include="img\banh-cuoi\9.jpg" />
+    <Content Include="img\banh-kem\bap-1.jpg" />
+    <Content Include="img\banh-kem\bap-2.jpg" />
+    <Content Include="img\banh-kem\bap-3.jpg" />
+    <Content Include="img\banh-kem\bap-4.jpg" />
+    <Content Include="img\banh-kem\bap-5.jpg" />
+    <Content Include="img\banh-kem\socola-1.jpg" />
+    <Content Include="img\banh-kem\socola-2.jpg" />
+    <Content Include="img\banh-kem\socola-3.jpg" />
+    <Content Include="img\banh-kem\socola-4.jpg" />
+    <Content Include="img\banh-kem\socola-5.jpg" />
+    <Content Include="img\banh-kem\socola-6.jpg" />
+    <Content Include="img\banh-kem\sua-tuoi-1.jpg" />
+    <Content Include="img\banh-kem\sua-tuoi-2.jpg" />
+    <Content Include="img\banh-kem\sua-tuoi-3.jpg" />
+    <Content Include="img\banh-kem\sua-tuoi-4.jpg" />
+    <Content Include="img\banh-kem\sua-tuoi-5.png" />
+    <Content Include="img\banh-sinh-nhat\1.jpg" />
+    <Content Include="img\banh-sinh-nhat\10.jpg" />
+    <Content Include="img\banh-sinh-nhat\11.jpg" />
+    <Content Include="img\banh-sinh-nhat\12.jpg" />
+    <Content Include="img\banh-sinh-nhat\2.jpg" />
+    <Content Include="img\banh-sinh-nhat\3.jpg" />
+    <Content Include="img\banh-sinh-nhat\4.jpg" />
+    <Content Include="img\banh-sinh-nhat\5.jpg" />
+    <Content Include="img\banh-sinh-nhat\6.jpg" />
+    <Content Include="img\banh-sinh-nhat\7.jpg" />
+    <Content Include="img\banh-sinh-nhat\8.jpg" />
+    <Content Include="img\banh-sinh-nhat\9.jpg" />
+    <Content Include="img\banner\banner-bg.jpg" />
+    <Content Include="img\blog\column\blog-c-1.jpg" />
+    <Content Include="img\blog\column\blog-c-2.jpg" />
+    <Content Include="img\blog\column\blog-c-3.jpg" />
+    <Content Include="img\blog\column\blog-c-4.jpg" />
+    <Content Include="img\blog\column\blog-c-5.jpg" />
+    <Content Include="img\blog\column\blog-c-6.jpg" />
+    <Content Include="img\blog\column\blog-c-7.jpg" />
+    <Content Include="img\blog\column\blog-c-8.jpg" />
+    <Content Include="img\blog\latest-news\l-news-1.jpg" />
+    <Content Include="img\blog\latest-news\l-news-2.jpg" />
+    <Content Include="img\blog\latest-news\l-news-3.jpg" />
+    <Content Include="img\blog\main-blog\blog-1.jpg" />
+    <Content Include="img\blog\main-blog\blog-2.jpg" />
+    <Content Include="img\blog\main-blog\blog-3.jpg" />
+    <Content Include="img\blog\main-blog\blog-4.jpg" />
+    <Content Include="img\blog\main-blog\blog-5.jpg" />
+    <Content Include="img\blog\recent-post\r-post-1.jpg" />
+    <Content Include="img\blog\recent-post\r-post-2.jpg" />
+    <Content Include="img\blog\recent-post\r-post-3.jpg" />
+    <Content Include="img\blog\recent-post\r-post-4.jpg" />
+    <Content Include="img\cake-feature\arivals-1.jpg" />
+    <Content Include="img\cake-feature\arivals-2.jpg" />
+    <Content Include="img\cake-feature\arivals-pic.jpg" />
+    <Content Include="img\cake-feature\c-feature-1.jpg" />
+    <Content Include="img\cake-feature\c-feature-2.jpg" />
+    <Content Include="img\cake-feature\c-feature-3.jpg" />
+    <Content Include="img\cake-feature\c-feature-4.jpg" />
+    <Content Include="img\cake-feature\c-feature-5.jpg" />
+    <Content Include="img\cake-feature\c-feature-6.jpg" />
+    <Content Include="img\cake-feature\c-feature-7.jpg" />
+    <Content Include="img\cake-feature\c-feature-8.jpg" />
+    <Content Include="img\cake-feature\c-feature-9.jpg" />
+    <Content Include="img\cake-feature\welcome-right.jpg" />
+    <Content Include="img\checkout-card.png" />
+    <Content Include="img\chef\chef-1.jpg" />
+    <Content Include="img\chef\chef-2.jpg" />
+    <Content Include="img\chef\chef-3.jpg" />
+    <Content Include="img\client\client-1.png" />
+    <Content Include="img\client\client-2.png" />
+    <Content Include="img\comment\comment-1.jpg" />
+    <Content Include="img\comming-bg.jpg" />
+    <Content Include="img\custom\bong-lan-trung-muoi-1.jpg" />
+    <Content Include="img\custom\bong-lan-trung-muoi-2.jpg" />
+    <Content Include="img\custom\bong-lan-trung-muoi-3.jpg" />
+    <Content Include="img\custom\bong-lan-trung-muoi-4.jpg" />
+    <Content Include="img\custom\bong-lan-trung-muoi-5.jpg" />
+    <Content Include="img\custom\bong-lan-trung-muoi-6.jpg" />
+    <Content Include="img\error-bg.jpg" />
+    <Content Include="img\faq-form-right.png" />
+    <Content Include="img\fav-icon.png" />
+    <Content Include="img\footer-logo.png" />
+    <Content Include="img\home-slider\slider-1.jpg" />
+    <Content Include="img\home-slider\slider-10.jpg" />
+    <Content Include="img\home-slider\slider-11.jpg" />
+    <Content Include="img\home-slider\slider-12.jpg" />
+    <Content Include="img\home-slider\slider-13.jpg" />
+    <Content Include="img\home-slider\slider-14.jpg" />
+    <Content Include="img\home-slider\slider-2.jpg" />
+    <Content Include="img\home-slider\slider-3.jpg" />
+    <Content Include="img\home-slider\slider-4.jpg" />
+    <Content Include="img\home-slider\slider-5.jpg" />
+    <Content Include="img\home-slider\slider-6.jpg" />
+    <Content Include="img\home-slider\slider-7.jpg" />
+    <Content Include="img\home-slider\slider-8.jpg" />
+    <Content Include="img\home-slider\slider-9.jpg" />
+    <Content Include="img\logo-2.png" />
+    <Content Include="img\logo-3.png" />
+    <Content Include="img\logo-circle-2.png" />
+    <Content Include="img\logo.png" />
+    <Content Include="img\map-marker.png" />
+    <Content Include="img\menu-draw-five.png" />
+    <Content Include="img\menu-draw.png" />
+    <Content Include="img\menu-left.png" />
+    <Content Include="img\menu-right.png" />
+    <Content Include="img\News\banh-tiramisu-bar-pompi.jpg" />
+    <Content Include="img\News\banh-tiramisu-ngot-ngao-01.jpg" />
+    <Content Include="img\News\banh-tiramisu-ngot-ngao-02.jpg" />
+    <Content Include="img\News\banh-tiramisu-ngot-ngao-03.jpg" />
+    <Content Include="img\News\banh-tiramisu-ngot-ngao-04.jpg" />
+    <Content Include="img\News\savoiardi.jpg" />
+    <Content Include="img\News\tiramisu-de-banh-bong-lan %281%29.jpg" />
+    <Content Include="img\News\tiramisu-de-banh-bong-lan.jpg" />
+    <Content Include="img\News\tiramisu-mousse-cake-banh-kem-y-quan-1 %281%29.jpg" />
+    <Content Include="img\News\tiramisu-mousse-cake-banh-kem-y-quan-1-2.jpg" />
+    <Content Include="img\News\tiramisu-mousse-cake-banh-kem-y-quan-1.jpg" />
+    <Content Include="img\News\tiramisu-mousse-cake-banh-kem-y-tiem-banh-dolce-vita-quan-2.jpg" />
+    <Content Include="img\News\ve-dep-cua-banh-tiramisu.jpg" />
+    <Content Include="img\our-bakery\bakery-1.jpg" />
+    <Content Include="img\our-bakery\bakery-2.jpg" />
+    <Content Include="img\our-bakery\bakery-3.jpg" />
+    <Content Include="img\portfolio\portfolio-1.jpg" />
+    <Content Include="img\portfolio\portfolio-2.jpg" />
+    <Content Include="img\portfolio\portfolio-3.jpg" />
+    <Content Include="img\portfolio\portfolio-4.jpg" />
+    <Content Include="img\portfolio\portfolio-5.jpg" />
+    <Content Include="img\portfolio\portfolio-6.jpg" />
+    <Content Include="img\portfolio\portfolio-7.jpg" />
+    <Content Include="img\portfolio\portfolio-8.jpg" />
+    <Content Include="img\portfolio\portfolio-9.jpg" />
+    <Content Include="img\product\cart-img.jpg" />
+    <Content Include="img\product\product-details-1.jpg" />
+    <Content Include="img\product\sale-product\s-product-1.jpg" />
+    <Content Include="img\product\sale-product\s-product-2.jpg" />
+    <Content Include="img\product\sale-product\s-product-3.jpg" />
+    <Content Include="img\product\sale-product\s-product-4.jpg" />
+    <Content Include="img\recipe\recipe-1.png" />
+    <Content Include="img\recipe\special-recipe.jpg" />
+    <Content Include="img\service-bg.jpg" />
+    <Content Include="img\service\service-1.png" />
+    <Content Include="img\service\service-2.png" />
+    <Content Include="img\service\service-3.png" />
+    <Content Include="img\service\service-4.png" />
+    <Content Include="img\service\service-5.png" />
+    <Content Include="img\service\service-6.png" />
+    <Content Include="img\shop-page-bg.png" />
+    <Content Include="img\special\special-1.png" />
+    <Content Include="img\special\special-2.png" />
+    <Content Include="img\Teams\team-1.jpg" />
+    <Content Include="img\Teams\team-2.jpg" />
+    <Content Include="img\Teams\team-3.jpg" />
+    <Content Include="img\tiramisu\1.jpg" />
+    <Content Include="img\tiramisu\2.jpg" />
+    <Content Include="img\tiramisu\3.jpg" />
+    <Content Include="img\tiramisu\4.jpg" />
+    <Content Include="img\tiramisu\5.jpg" />
+    <Content Include="img\video\video-1.jpg" />
+    <Content Include="img\w-left-techture.png" />
+    <Content Include="img\w-right-techture.png" />
+    <Content Include="img\welcome-bg.jpg" />
+    <Content Include="js\bootstrap.min.js" />
+    <Content Include="js\comingsoon.js" />
+    <Content Include="js\contact.js" />
+    <Content Include="js\gmaps.min.js" />
+    <Content Include="js\jquery-3.2.1.min.js" />
+    <Content Include="js\jquery.form.js" />
+    <Content Include="js\jquery.validate.min.js" />
+    <Content Include="js\map-active.js" />
+    <Content Include="js\popper.min.js" />
+    <Content Include="js\theme.js" />
+    <Content Include="Models\Model1.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Model1.Context.cs</LastGenOutput>
+      <DependentUpon>Model1.edmx</DependentUpon>
+    </Content>
+    <Content Include="Models\Model1.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Model1.edmx</DependentUpon>
+      <LastGenOutput>Model1.cs</LastGenOutput>
+    </Content>
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
     <Content Include="Scripts\bootstrap.esm.js" />
     <Content Include="Scripts\bootstrap.esm.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <EntityDeploy Include="Models\Model1.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>Model1.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\Model1.edmx.diagram">
+      <DependentUpon>Model1.edmx</DependentUpon>
+    </Content>
+    <Content Include="fonts\fontawesome-webfont3e6e.eot" />
+    <Content Include="fonts\fontawesome-webfont3e6e.ttf" />
+    <Content Include="fonts\fontawesome-webfont3e6e.woff" />
+    <Content Include="fonts\fontawesome-webfont3e6e.woff2" />
+    <Content Include="fonts\fontawesome-webfontd41d.eot" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -163,6 +411,53 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="vendors\animate-css\animate.css" />
+    <Content Include="vendors\datetime-picker\css\bootstrap-datetimepicker.min.css" />
+    <Content Include="vendors\datetime-picker\js\bootstrap-datetimepicker.min.js" />
+    <Content Include="vendors\datetime-picker\js\moment.min.js" />
+    <Content Include="vendors\flat-icon\flaticon.css" />
+    <Content Include="vendors\flat-icon\Flaticon.svg" />
+    <Content Include="vendors\isotope\imagesloaded.pkgd.min.js" />
+    <Content Include="vendors\isotope\isotope.pkgd.min.js" />
+    <Content Include="vendors\jquery-ui\images\ui-icons_444444_256x240.png" />
+    <Content Include="vendors\jquery-ui\images\ui-icons_555555_256x240.png" />
+    <Content Include="vendors\jquery-ui\images\ui-icons_777620_256x240.png" />
+    <Content Include="vendors\jquery-ui\images\ui-icons_777777_256x240.png" />
+    <Content Include="vendors\jquery-ui\images\ui-icons_cc0000_256x240.png" />
+    <Content Include="vendors\jquery-ui\images\ui-icons_ffffff_256x240.png" />
+    <Content Include="vendors\jquery-ui\jquery-ui.min.css" />
+    <Content Include="vendors\jquery-ui\jquery-ui.min.js" />
+    <Content Include="vendors\lightbox\simpleLightbox.css" />
+    <Content Include="vendors\lightbox\simpleLightbox.min.js" />
+    <Content Include="vendors\linearicons\fonts\Linearicons-Free54e9.svg" />
+    <Content Include="vendors\linearicons\style.css" />
+    <Content Include="vendors\magnifc-popup\jquery.magnific-popup.min.js" />
+    <Content Include="vendors\magnifc-popup\magnific-popup.css" />
+    <Content Include="vendors\nice-select\css\nice-select.css" />
+    <Content Include="vendors\nice-select\js\jquery.nice-select.min.js" />
+    <Content Include="vendors\owl-carousel\owl.carousel.min.css" />
+    <Content Include="vendors\owl-carousel\owl.carousel.min.js" />
+    <Content Include="vendors\owl-carousel\owl.video.play.html" />
+    <Content Include="vendors\revolution\assets\coloredbg.png" />
+    <Content Include="vendors\revolution\assets\gridtile.png" />
+    <Content Include="vendors\revolution\assets\gridtile_3x3.png" />
+    <Content Include="vendors\revolution\assets\gridtile_3x3_white.png" />
+    <Content Include="vendors\revolution\assets\gridtile_white.png" />
+    <Content Include="vendors\revolution\assets\loader.gif" />
+    <Content Include="vendors\revolution\css\closedhand.html" />
+    <Content Include="vendors\revolution\css\layers.css" />
+    <Content Include="vendors\revolution\css\navigation.css" />
+    <Content Include="vendors\revolution\css\openhand.html" />
+    <Content Include="vendors\revolution\css\settings.css" />
+    <Content Include="vendors\revolution\fonts\revicons\revicons90c6.svg" />
+    <Content Include="vendors\revolution\js\extensions\revolution.extension.actions.min.js" />
+    <Content Include="vendors\revolution\js\extensions\revolution.extension.layeranimation.min.js" />
+    <Content Include="vendors\revolution\js\extensions\revolution.extension.navigation.min.js" />
+    <Content Include="vendors\revolution\js\extensions\revolution.extension.slideanims.min.js" />
+    <Content Include="vendors\revolution\js\extensions\revolution.extension.video.min.js" />
+    <Content Include="vendors\revolution\js\jquery.themepunch.revolution.min.js" />
+    <Content Include="vendors\revolution\js\jquery.themepunch.tools.min.js" />
+    <Content Include="vendors\stroke-icon\style.css" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -174,13 +469,29 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\About.cshtml" />
-    <Content Include="Views\Home\Contact.cshtml" />
+    <Content Include="vendors\flat-icon\Flaticon.eot" />
+    <Content Include="vendors\flat-icon\Flaticon.ttf" />
+    <Content Include="vendors\flat-icon\Flaticon.woff" />
+    <Content Include="vendors\flat-icon\Flaticond41d.eot" />
+    <Content Include="vendors\linearicons\fonts\Linearicons-Free54e9.eot" />
+    <Content Include="vendors\linearicons\fonts\Linearicons-Free54e9.ttf" />
+    <Content Include="vendors\linearicons\fonts\Linearicons-Free54e9.woff" />
+    <Content Include="vendors\linearicons\fonts\Linearicons-Free54e9.woff2" />
+    <Content Include="vendors\linearicons\fonts\Linearicons-Freed41d.eot" />
+    <Content Include="vendors\revolution\fonts\revicons\revicons90c6.eot" />
+    <Content Include="vendors\revolution\fonts\revicons\revicons90c6.ttf" />
+    <Content Include="vendors\revolution\fonts\revicons\revicons90c6.woff" />
+    <Content Include="vendors\stroke-icon\fonts\Stroke-Gap-Icons.eot" />
+    <Content Include="Views\Temp\_MyLayout.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Temp\getMenu.cshtml" />
+    <Content Include="Views\Home\getCakes.cshtml" />
+    <Content Include="Views\Home\getNews.cshtml" />
+    <Content Include="Views\AboutUs\AboutUs.cshtml" />
+    <Content Include="Views\AboutUs\getTeam.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.rtl.min.css.map" />
@@ -208,6 +519,9 @@
     <Content Include="Scripts\bootstrap.bundle.js.map" />
     <Content Include="Scripts\jquery-3.4.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.4.1.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using HPCakes.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -8,23 +9,28 @@ namespace HPCakes.Controllers
 {
     public class HomeController : Controller
     {
+        cakeshopEntities _db = new cakeshopEntities();
         public ActionResult Index()
         {
             return View();
         }
 
-        public ActionResult About()
+        public ActionResult getCakes()
         {
-            ViewBag.Message = "Your application description page.";
-
-            return View();
+            var v = from t in _db.products
+                    where t.hide == true
+                    orderby t.order ascending
+                    select t;
+            return PartialView(v.ToList());
         }
 
-        public ActionResult Contact()
+        public ActionResult getNews()
         {
-            ViewBag.Message = "Your contact page.";
-
-            return View();
+            var v = from t in _db.news
+                    where t.hide == true
+                    orderby t.order ascending
+                    select t;
+            return PartialView(v.ToList());
         }
     }
 }
