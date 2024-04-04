@@ -1,0 +1,115 @@
+﻿
+@{
+    ViewBag.Title = "Blogs";
+    Layout = "~/Views/Temp/_MyLayout.cshtml";
+}
+
+<!--================End Main Header Area =================-->
+<section class="banner_area">
+    <div class="container">
+        <div class="banner_text">
+            <h3>Blog</h3>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="blog.html">Blog</a></li>
+            </ul>
+        </div>
+    </div>
+</section>
+<!--================End Main Header Area =================-->
+<!--================Blog Main Area =================-->
+<section class="main_blog_area p_100">
+    <div class="container">
+        <div class="row blog_area_inner">
+            <div class="col-lg-9">
+                 @{ Html.RenderAction("getBlogs", "Blog");}
+                
+            </div>
+
+            <!--================Start Side Blog Area =================-->
+            <div class="col-lg-3">
+                <div class="right_sidebar_area">
+                    <aside class="r_widget search_widget">
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder="Enter Search Keywords">
+                            <div class="input-group-append">
+                                <button class="btn" type="button"><i class="icon icon-Search"></i></button>
+                            </div>
+                        </div>
+                    </aside>
+                    <aside class="r_widget categories_widget">
+                        <div class="r_title">
+                            <h3>Categories</h3>
+                        </div>
+                        <ul class="list_style">
+                            <li><a href="#">Chocolates<i class="fa fa-angle-right" aria-hidden="true"></i></a></li>
+                            <li><a href="#">Summer Caket<i class="fa fa-angle-right" aria-hidden="true"></i></a></li>
+                            <li><a href="#">Ice Cream<i class="fa fa-angle-right" aria-hidden="true"></i></a></li>
+                            <li><a href="#">Lollipop<i class="fa fa-angle-right" aria-hidden="true"></i></a></li>
+                            <li><a href="#">Sweet<i class="fa fa-angle-right" aria-hidden="true"></i></a></li>
+                            <li><a href="#">Bakery<i class="fa fa-angle-right" aria-hidden="true"></i></a></li>
+                        </ul>
+                    </aside>
+                    <aside class="r_widget recent_widget">
+                        <div class="r_title">
+                            <h3>Recent News</h3>
+                        </div>
+                        <div class="recent_w_inner">
+                            <div class="media">
+                                <div class="d-flex">
+                                    <img src="~/img/blog/recent-post/r-post-1.jpg" alt="">
+                                </div>
+                                <div class="media-body">
+                                    <a href="#"><h4>A very bad quack might jinx zippy fowls ...</h4></a>
+                                    <a href="#"><p>08 Feb 2018</p></a>
+                                </div>
+                            </div>
+                            <div class="media">
+                                <div class="d-flex">
+                                    <img src="~/img/blog/recent-post/r-post-2.jpg" alt="">
+                                </div>
+                                <div class="media-body">
+                                    <a href="#"><h4>Big Steps to change management succes...</h4></a>
+                                    <a href="#"><p>08 Feb 2018</p></a>
+                                </div>
+                            </div>
+                            <div class="media">
+                                <div class="d-flex">
+                                    <img src="~/img/blog/recent-post/r-post-3.jpg" alt="">
+                                </div>
+                                <div class="media-body">
+                                    <a href="#"><h4>A paradisematic country, where roasted parts...</h4></a>
+                                    <a href="#"><p>08 Feb 2018</p></a>
+                                </div>
+                            </div>
+                            <div class="media">
+                                <div class="d-flex">
+                                    <img src="~/img/blog/recent-post/r-post-4.jpg" alt="">
+                                </div>
+                                <div class="media-body">
+                                    <a href="#"><h4>A wonderful serenity has taken possession...</h4></a>
+                                    <a href="#"><p>08 Feb 2018</p></a>
+                                </div>
+                            </div>
+                        </div>
+                    </aside>
+                    <aside class="r_widget tags_widget">
+                        <div class="r_title">
+                            <h3>Tags</h3>
+                        </div>
+                        <ul class="list_style">
+                            <li><a href="#">Baking Tips</a></li>
+                            <li><a href="#">Bakery</a></li>
+                            <li><a href="#">Recipe</a></li>
+                            <li><a href="#">Baking Tool</a></li>
+                            <li><a href="#">Cakes</a></li>
+                            <li><a href="#">Chocolates</a></li>
+                        </ul>
+                    </aside>
+                </div>
+            </div>
+            <!--================End Side Blog Area =================-->
+        </div>
+    </div>
+</section>
+<!--================End Blog Main Area =================-->
