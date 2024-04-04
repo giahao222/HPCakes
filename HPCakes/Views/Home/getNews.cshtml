@@ -18,7 +18,7 @@
                             </div>
                             <div class="l_news_hover">
                                 <a href="#"><h5>Oct 15, 2016</h5></a>
-                                <a href="#"><h4>@item.name</h4></a>
+                                <a href="@Url.Action("BlogsDetail", "Blog", new { id = item.id, meta = item.meta })"><h4>@item.name</h4></a>
                             </div>
                         </div>
                     </div>
@@ -32,7 +32,7 @@
                             </div>
                             <div class="l_news_text">
                                 <a href="#"><h5>Oct 15, 2016</h5></a>
-                                <a href="#"><h4>@item.name</h4></a>
+                                <a href="@Url.Action("BlogsDetail", "Blog", new { id = item.id, meta = item.meta })"><h4>@item.name</h4></a>
                                 <p class="truncated">@item.detail</p>
                             </div>
                         </div>
@@ -43,16 +43,18 @@
                     <div class="col-lg-4 col-md-6">
                         <div class="l_news_item">
                             <div class="l_news_img">
-                                <img class="~/img-fluid" src="~/img/@item.img" alt="" style="max-height: 200px">
+                                <a href="@Url.Action("BlogsDetail", "Blog", new { id = item.id, meta = item.meta })">
+                                    <img class="img-fluid" src="~/img/@item.img" alt="" style="max-height: 200px">
+                                </a>
                             </div>
                             <div class="l_news_text">
                                 <a href="#"><h5>Oct 15, 2016</h5></a>
-                                <a href="#"><h4>@item.name</h4></a>
+                                <a href="@Url.Action("BlogsDetail", "Blog", new { id = item.id, meta = item.meta })"><h4>@item.name</h4></a>
                                 <p class="truncated">@item.detail</p>
                             </div>
                         </div>
-
                     </div>
+
                 }
             }
         </div>

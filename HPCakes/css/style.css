@@ -3603,19 +3603,19 @@ i:before {
   cursor: pointer;
 }
 
-.blog_item .blog_img img {
+.blog_item .blog_img a img {
   -webkit-transition: all 300ms ease;
   -o-transition: all 300ms ease;
   transition: all 300ms ease;
 }
 
-.blog_item .blog_img:hover img {
+.blog_item .blog_img a:hover img {
   -webkit-transform: scale(1.05);
   -ms-transform: scale(1.05);
   transform: scale(1.05);
 }
 
-.blog_item .blog_img:hover:before {
+.blog_item .blog_img a:hover:before {
   opacity: 1;
 }
 
