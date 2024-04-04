@@ -22,9 +22,10 @@ namespace HPCakes
                         "type","san-pham"
                     }
                 },
-                new[] { "WebApplication1.Controllers" }
+                new[] { "HPCakes.Controllers" }
             );
 
+        namespaces: new[] { "HPCakes.Controllers" };
             routes.MapRoute(
                 "ProductDetail",
                 "{type}/{meta}/{id}",
@@ -34,7 +35,7 @@ namespace HPCakes
                         "type","san-pham"
                     }
                 },
-                new[] { "WebApplication1.Controllers" }
+                new[] { "HPCakes.Controllers" }
             );
 
             routes.MapRoute(
@@ -46,7 +47,7 @@ namespace HPCakes
                         "type","tin-tuc"
                     }
                 },
-                new[] { "WebApplication1.Controllers" }
+                new[] { "HPCakes.Controllers" }
             );
 
             routes.MapRoute(
@@ -58,7 +59,7 @@ namespace HPCakes
                         "type","tin-tuc"
                     }
                 },
-                new[] { "WebApplication1.Controllers" }
+                new[] { "HPCakes.Controllers" }
             );
 
             routes.MapRoute(
@@ -70,7 +71,7 @@ namespace HPCakes
                         "type","thong-tin"
                     }
                 },
-                new[] { "WebApplication1.Controllers" }
+                new[] { "HPCakes.Controllers" }
             );
 
             routes.MapRoute(
@@ -82,7 +83,7 @@ namespace HPCakes
                         "type","lien-he"
                     }
                 },
-                new[] { "WebApplication1.Controllers" }
+                new[] { "HPCakes.Controllers" }
             );
 
             routes.MapRoute(
@@ -94,7 +95,7 @@ namespace HPCakes
                         "type","trang-chu"
                     }
                 },
-                new[] { "WebApplication1.Controllers" }
+                new[] { "HPCakes.Controllers" }
             );
 
             routes.MapRoute(
@@ -109,7 +110,7 @@ namespace HPCakes
                         "type","san-pham"
                     }
                 },
-                new[] { "WebApplication1.Controllers" }
+                new[] { "HPCakes.Controllers" }
             );
 
             routes.MapRoute(

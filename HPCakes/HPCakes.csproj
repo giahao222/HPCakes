@@ -135,6 +135,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Areas\admin\adminAreaRegistration.cs" />
+    <Compile Include="Areas\admin\Controllers\DefaultController.cs" />
     <Compile Include="Controllers\AboutUsController.cs" />
     <Compile Include="Controllers\BlogController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -194,7 +195,6 @@
     <Content Include="Areas\admin\img\undraw_profile_2.svg" />
     <Content Include="Areas\admin\img\undraw_profile_3.svg" />
     <Content Include="Areas\admin\img\undraw_rocket.svg" />
-    <Content Include="Areas\admin\Views\Shared\index.html" />
     <Content Include="Areas\admin\js\demo\chart-area-demo.js" />
     <Content Include="Areas\admin\js\demo\chart-bar-demo.js" />
     <Content Include="Areas\admin\js\demo\chart-pie-demo.js" />
@@ -1968,6 +1968,19 @@
     <Content Include="Areas\admin\vendor\morrisjs\morris.min.js" />
     <Content Include="Areas\admin\vendor\raphael\raphael.js" />
     <Content Include="Areas\admin\vendor\raphael\raphael.min.js" />
+    <Content Include="Areas\admin\Views\Default\blank.html" />
+    <Content Include="Areas\admin\Views\Default\buttons.html" />
+    <Content Include="Areas\admin\Views\Default\flot.html" />
+    <Content Include="Areas\admin\Views\Default\forms.html" />
+    <Content Include="Areas\admin\Views\Default\grid.html" />
+    <Content Include="Areas\admin\Views\Default\icons.html" />
+    <Content Include="Areas\admin\Views\Default\index.html" />
+    <Content Include="Areas\admin\Views\Default\login.html" />
+    <Content Include="Areas\admin\Views\Default\morris.html" />
+    <Content Include="Areas\admin\Views\Default\notifications.html" />
+    <Content Include="Areas\admin\Views\Default\panels-wells.html" />
+    <Content Include="Areas\admin\Views\Default\tables.html" />
+    <Content Include="Areas\admin\Views\Default\typography.html" />
     <Content Include="Content\bootstrap-grid.css" />
     <Content Include="Content\bootstrap-grid.min.css" />
     <Content Include="Content\bootstrap-grid.rtl.css" />
@@ -2519,7 +2532,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Areas\admin\Controllers\" />
+    <Folder Include="Areas\admin\Views\Shared\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.rtl.min.css.map" />
