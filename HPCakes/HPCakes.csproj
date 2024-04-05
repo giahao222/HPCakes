@@ -181,7 +181,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Areas\admin\.gitignore" />
     <Content Include="Areas\admin\Content\css\sb-admin-2.css" />
     <Content Include="Areas\admin\Content\css\sb-admin-2.min.css" />
     <Content Include="Areas\admin\Content\Data\flot-data.js" />
@@ -2010,7 +2009,6 @@
     <Content Include="Assets\Admin\dist\css\sb-admin-2.min.css" />
     <Content Include="Assets\Admin\dist\js\sb-admin-2.js" />
     <Content Include="Assets\Admin\dist\js\sb-admin-2.min.js" />
-    <Content Include="Areas\admin\gulpfile.js" />
     <Content Include="Assets\Admin\img\undraw_posting_photo.svg" />
     <Content Include="Assets\Admin\img\undraw_profile.svg" />
     <Content Include="Assets\Admin\img\undraw_profile_1.svg" />
@@ -4240,9 +4238,6 @@
     <Content Include="Assets\Admin\vendor\fontawesome-free\webfonts\fa-solid-900.woff2" />
     <Content Include="Assets\Admin\vendor\jquery\jquery.min.map" />
     <Content Include="Assets\Admin\vendor\jquery\jquery.slim.min.map" />
-    <Content Include="Areas\admin\bower.json" />
-    <Content Include="Areas\admin\package.json" />
-    <Content Include="Areas\admin\LICENSE" />
     <Content Include="Assets\Admin\less\mixins.less" />
     <Content Include="Assets\Admin\less\sb-admin-2.less" />
     <Content Include="Assets\Admin\less\variables.less" />
