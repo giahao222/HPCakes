@@ -16,7 +16,7 @@ namespace HPCakes
             routes.MapRoute(
                 "Product",
                 "{type}/{meta}",
-                new { controller = "Product", action = "Product", meta = UrlParameter.Optional },
+                new { controller = "Product", action = "Index", meta = UrlParameter.Optional },
                 new RouteValueDictionary {
                     {
                         "type","san-pham"
@@ -110,6 +110,18 @@ namespace HPCakes
                     }
                 },
                 namespaces: new[] { "HPCakes.Controllers" }
+            );
+
+            routes.MapRoute(
+                "Cart",
+                "{type}/{meta}",
+                new { controller = "Cart", action = "Index", meta = UrlParameter.Optional },
+                new RouteValueDictionary {
+                    {
+                        "type","gio-hang"
+                    }
+                },
+                new[] { "HPCakes.Controllers" }
             );
 
             routes.MapRoute(

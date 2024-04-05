@@ -1,0 +1,22 @@
+﻿@model IEnumerable<HPCakes.Models.product>
+
+@{
+    var random = new Random();
+    var uniqueItems = Model.OrderBy(x => random.Next()).Take(4).ToList();
+}
+
+@foreach (var i in uniqueItems)
+{
+    <div class="col-lg-3 col-md-4 col-6">
+        <div class="cake_feature_item">
+            <div class="cake_img">
+                <a href="@Url.Action("ProductDetail", "Product", new { id = i.id })"><img src="~/img/@i.img" alt=""></a>
+            </div>
+            <div class="cake_text">
+                <h4>@i.price vnđ</h4>
+                <h3>@i.name</h3>
+                <a class="pest_btn add-to-cart-btn" href="#" data-product-id="@i.id">Add to cart</a>
+            </div>
+        </div>
+    </div>
+}

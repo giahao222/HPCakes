@@ -144,7 +144,9 @@
     <Compile Include="Areas\admin\Controllers\newsController.cs" />
     <Compile Include="Controllers\AboutUsController.cs" />
     <Compile Include="Controllers\BlogController.cs" />
+    <Compile Include="Controllers\CartController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Controllers\TempController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -4668,6 +4670,13 @@
     <Content Include="Views\Blog\Blogs.cshtml" />
     <Content Include="Views\Blog\getBlogs.cshtml" />
     <Content Include="Views\Blog\BlogsDetail.cshtml" />
+    <Content Include="Views\Product\getCategory.cshtml" />
+    <Content Include="Views\Product\getProduct.cshtml" />
+    <Content Include="Views\Product\getProductByCategory.cshtml" />
+    <Content Include="Views\Product\getProductRecommend.cshtml" />
+    <Content Include="Views\Product\Index.cshtml" />
+    <Content Include="Views\Product\ProductDetail.cshtml" />
+    <Content Include="Views\Cart\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

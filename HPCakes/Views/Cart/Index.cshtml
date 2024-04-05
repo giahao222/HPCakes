@@ -1,0 +1,138 @@
+﻿@model List<HPCakes.Models.product>
+
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Temp/_MyLayout.cshtml";
+}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+    // Xóa sản phẩm khỏi giỏ hàng
+    function removeFromCart(productId) {
+        $.ajax({
+            url: "/Cart/RemoveFromCart",
+            type: "POST",
+            data: { productId: productId },
+            success: function (response) {
+                // Cập nhật lại trang khi xóa sản phẩm thành công
+                location.reload();
+            },
+            error: function () {
+                alert("Error removing product from cart!");
+            }
+        });
+    }
+</script>
+@*<script>
+    $(document).ready(function () {
+        $(".pest_btn").click(function (e) {
+            e.preventDefault(); // Ngăn chặn hành động mặc định của nút
+
+            $.ajax({
+                url: "/Cart/AddToCart", // Đường dẫn đến action AddToCart trong controller
+                type: "POST",
+                success: function (response) {
+                    // Xử lý khi nhận dữ liệu sản phẩm từ server
+                    updateCart(response);
+                },
+                error: function () {
+                    // Xử lý khi có lỗi xảy ra
+                    alert("Error adding product to cart!");
+                }
+            });
+        });
+    });
+
+    function updateCart(product) {
+        // Cập nhật thông tin sản phẩm trong trang HTML
+        var tableRow = "<tr>" +
+                        "<td><img src='~/img/"+product.img+"' alt=''></td>" +
+                        "<td>" + product.name + "</td>" +
+                        "<td>" + product.price + " vnđ</td>" +
+                        "<td><select class='product_select'>" +
+                        "<option data-display='1'>1</option>" +
+                        "<option value='1'>2</option>" +
+                        "<option value='2'>3</option>" +
+                        "<option value='4'>4</option>" +
+                        "<option value='5'>5</option>" +
+                        "</select></td>" +
+                        "<td>" + product.price + " vnđ</td>" +
+                        "<td>X</td>" +
+                        "</tr>";
+
+        $("tbody").append(tableRow);
+    }
+</script>*@
+
+<!--================Cart Table Area =================-->
+<section class="cart_table_area p_100">
+    <div class="container">
+        <div class="table-responsive">
+            <table class="table" style="margin-top:65px">
+                <thead>
+                    <tr>
+                        <th scope="col">Ảnh Minh Họa</th>
+                        <th scope="col">Tên Sản Phẩm</th>
+                        <th scope="col">Giá Tiền</th>
+                        <th scope="col">Số Lượng</th>
+                        <th scope="col">Thành Tiền</th>
+                        <th scope="col"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var product in Model)
+                    {
+                        <tr>
+                            <td>
+                                <img src="~/img/@product.img" style="width: 150px; height: 150px; object-fit: cover; display: flex; justify-content: center;"/>
+                            </td>
+                            <td>@product.name</td>
+                            <td>@product.price vnđ</td>
+                            <td>
+                                <select class="product_select">
+                                    <option data-display="1">1</option>
+                                    <option value="1">2</option>
+                                    <option value="2">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                </select>
+                            </td>
+                            <td>@(product.price) vnđ</td>
+                            <td><button class="btn btn-danger" onclick="removeFromCart(@product.id)">Xóa</button></td>
+                        </tr>
+                    }
+                    <tr>
+                        <td>
+                            <form class="form-inline">
+                                <div class="form-group">
+                                    <input type="text" class="form-control" placeholder="Coupon code">
+                                </div>
+                                <button type="submit" class="btn">Sử dụng Mã Giảm Giá</button>
+                            </form>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="row cart_total_inner">
+            <div class="col-lg-7"></div>
+            <div class="col-lg-5">
+                <div class="cart_total_text">
+                    <div class="cart_head">
+                        Tổng Tiền Giỏ Hàng
+                    </div>
+                    <div class="sub_total">
+                        <h5>Tổng tiền trước giảm giá<span>$25.00</span></h5>
+                    </div>
+                    <div class="total">
+                        <h4>Tổng tiền cần thanh toán<span>$25.00</span></h4>
+                    </div>
+                    <div class="cart_footer">
+                        <a class="pest_btn" href="#">Tiến hành Thanh Toán</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!--================End Cart Table Area =================-->

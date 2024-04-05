@@ -1,0 +1,56 @@
+﻿@model IPagedList<HPCakes.Models.product>
+@using PagedList.Mvc;
+@using PagedList;
+
+<div class="row product_item_inner">
+    @foreach (var i in Model)
+    {
+        <div class="col-lg-4 col-md-4 col-6">
+            <div class="cake_feature_item">
+                <div class="cake_img">
+                    <a href="@ViewBag.meta/@i.meta/@i.id"><img src="~/img/@i.img" alt=""></a>
+                </div>
+                <div class="cake_text">
+                    <h4>@i.price vnđ</h4>
+                    <h3>@i.name</h3>
+                    <a class="pest_btn add-to-cart-btn" href="#" data-product-id="@i.id">Add to cart</a>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+<style>
+    .pagination_format {
+        margin-top: 20px;
+        text-align: center;
+    }
+
+        .pagination_format a {
+            display: inline-block;
+            padding: 5px 10px;
+            margin: 0 5px;
+            color: #333;
+            border: 1px solid #ccc;
+            text-decoration: none;
+        }
+
+            .pagination_format a:hover {
+                background-color: #f0f0f0;
+            }
+
+        .pagination_format .current {
+            background-color: #007bff;
+            color: #fff;
+            border-color: #007bff;
+        }
+
+        .pagination_format .disabled {
+            color: #ccc;
+            pointer-events: none;
+        }
+</style>
+
+<div class="pagination_format">
+    Trang: @Html.PagedListPager(Model, page => Url.Action("Index", "Product", new { page }))
+</div>

@@ -1,0 +1,8 @@
+﻿@model List<HPCakes.Models.category>
+
+<ul class="list_style">
+    @foreach (var i in Model)
+    {
+        <li><a href="/@ViewBag.meta/@i.meta/">@i.name</a></li>
+    }
+</ul>
