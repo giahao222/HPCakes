@@ -22,10 +22,9 @@ namespace HPCakes
                         "type","san-pham"
                     }
                 },
-                new[] { "HPCakes.Controllers" }
-            );
+                namespaces: new[] { "HPCakes.Controllers" });
 
-        namespaces: new[] { "HPCakes.Controllers" };
+        
             routes.MapRoute(
                 "ProductDetail",
                 "{type}/{meta}/{id}",
@@ -35,7 +34,7 @@ namespace HPCakes
                         "type","san-pham"
                     }
                 },
-                new[] { "HPCakes.Controllers" }
+                namespaces: new[] { "HPCakes.Controllers" }
             );
 
             routes.MapRoute(
@@ -47,7 +46,7 @@ namespace HPCakes
                         "type","tin-tuc"
                     }
                 },
-                new[] { "HPCakes.Controllers" }
+                namespaces: new[] { "HPCakes.Controllers" }
             );
 
             routes.MapRoute(
@@ -59,7 +58,7 @@ namespace HPCakes
                         "type","tin-tuc"
                     }
                 },
-                new[] { "HPCakes.Controllers" }
+                namespaces: new[] { "HPCakes.Controllers" }
             );
 
             routes.MapRoute(
@@ -71,7 +70,7 @@ namespace HPCakes
                         "type","thong-tin"
                     }
                 },
-                new[] { "HPCakes.Controllers" }
+                namespaces: new[] { "HPCakes.Controllers" }
             );
 
             routes.MapRoute(
@@ -83,7 +82,7 @@ namespace HPCakes
                         "type","lien-he"
                     }
                 },
-                new[] { "HPCakes.Controllers" }
+                namespaces: new[] { "HPCakes.Controllers" }
             );
 
             routes.MapRoute(
@@ -95,7 +94,7 @@ namespace HPCakes
                         "type","trang-chu"
                     }
                 },
-                new[] { "HPCakes.Controllers" }
+                namespaces: new[] { "HPCakes.Controllers" }
             );
 
             routes.MapRoute(
@@ -110,13 +109,14 @@ namespace HPCakes
                         "type","san-pham"
                     }
                 },
-                new[] { "HPCakes.Controllers" }
+                namespaces: new[] { "HPCakes.Controllers" }
             );
 
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
-                defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
+                defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional },
+                namespaces: new[] { "HPCakes.Controllers" }
             );
         }
     }
