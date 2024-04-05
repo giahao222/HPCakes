@@ -46,6 +46,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="CKFinder">
+      <HintPath>Areas\admin\Content\ckfinder\bin\Debug\CKFinder.dll</HintPath>
+    </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
@@ -138,6 +141,7 @@
     <Compile Include="Areas\admin\adminAreaRegistration.cs" />
     <Compile Include="Areas\admin\Controllers\HomeController.cs" />
     <Compile Include="Areas\admin\Controllers\menusController.cs" />
+    <Compile Include="Areas\admin\Controllers\newsController.cs" />
     <Compile Include="Controllers\AboutUsController.cs" />
     <Compile Include="Controllers\BlogController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -4567,6 +4571,11 @@
     <Content Include="Areas\admin\Content\scss\utilities\_progress.scss" />
     <Content Include="Areas\admin\Content\scss\utilities\_rotate.scss" />
     <Content Include="Areas\admin\Content\scss\utilities\_text.scss" />
+    <Content Include="Areas\admin\Views\news\Create.cshtml" />
+    <Content Include="Areas\admin\Views\news\Delete.cshtml" />
+    <Content Include="Areas\admin\Views\news\Details.cshtml" />
+    <Content Include="Areas\admin\Views\news\Edit.cshtml" />
+    <Content Include="Areas\admin\Views\news\Index.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
