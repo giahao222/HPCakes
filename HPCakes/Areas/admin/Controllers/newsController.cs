@@ -8,6 +8,8 @@ using System.Web;
 using System.Web.Mvc;
 using HPCakes.Models;
 using HPCakes.Help;
+using System.Data.Entity.Validation;
+using System.IO;
 
 namespace HPCakes.Areas.admin.Controllers
 {
@@ -47,13 +49,41 @@ namespace HPCakes.Areas.admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "id,name,img,description,link,detail,meta,hide,order,datebegin")] news news)
+        [ValidateInput(false)]
+        public ActionResult Create([Bind(Include = "id,name,img,description,detail,meta,hide,order,datebegin")] news news, HttpPostedFileBase img)
         {
-            if (ModelState.IsValid)
+            try
             {
-                db.news.Add(news);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                var path = "";
+                var filename = "";
+                if (ModelState.IsValid)
+                {
+                    if (img != null)
+                    {
+                        //filename = Guid.NewGuid().ToString() + img.FileName;
+                        filename = DateTime.Now.ToString("dd-MM-yy-hh-mm-ss-") + img.FileName;
+                        path = Path.Combine(Server.MapPath("~/Content/upload/img/news"), filename);
+                        img.SaveAs(path);
+                        news.img = filename; //Lưu ý
+                    }
+                    else
+                    {
+                        news.img = "logo.png";
+                    }
+                    news.datebegin = Convert.ToDateTime(DateTime.Now.ToShortDateString());
+                    news.meta = Functions.ConvertToUnSign(news.meta); //convert Tiếng Việt không dấu
+                    db.news.Add(news);
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+            }
+            catch (DbEntityValidationException e)
+            {
+                throw e;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
             }
 
             return View(news);
