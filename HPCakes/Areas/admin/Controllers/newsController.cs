@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using HPCakes.Models;
+using HPCakes.Help;
 
 namespace HPCakes.Areas.admin.Controllers
 {
