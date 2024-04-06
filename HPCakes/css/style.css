@@ -1797,7 +1797,7 @@ i:before {
                     left: -15px;
                 }
 
-            .banner_text ul li:first-child a {
+            .banner_text ul li:last-child a {
                 color: #f195b2;
             }
 
@@ -2790,6 +2790,10 @@ i:before {
         color: #473c3a;
         font-family: "Playfair Display", serif;
         font-style: italic;
+    }
+
+    .our_mission_inner .mission_inner_text .nav li:hover a {
+        color: #f195b2;
     }
 
     .our_mission_inner .mission_inner_text .nav li:last-child {
@@ -4895,6 +4899,10 @@ i:before {
                     color: #fff;
                 }
 
+                    .bakery_video_area .video_inner .media .d-flex i:hover {
+                        color: #f195b2;
+                    }
+
                     .bakery_video_area .video_inner .media .d-flex i:before {
                         font-size: 64px;
                     }
@@ -5642,6 +5650,7 @@ i:before {
 ============================================================================================ */
 .product_details_area .product_d_price {
     margin-bottom: 80px;
+    margin-top:65px
 }
 
     .product_details_area .product_d_price .product_img {
@@ -5662,7 +5671,7 @@ i:before {
     font-size: 16px;
     line-height: 26px;
     color: #797979;
-    font-family: "Open Sans", sans-serif;
+    font-family: "Playfair Display", sans-serif;
     border-bottom: 1px solid #eaeaea;
     margin-bottom: 0px;
     padding: 30px 0px;
@@ -5671,13 +5680,14 @@ i:before {
 .product_details_text h5 {
     font-size: 18px;
     color: #242424;
-    font-family: "Open Sans", sans-serif;
+    font-family: "Playfair Display", sans-serif;
     font-weight: 600;
     padding: 25px 0px;
 }
 
     .product_details_text h5 span {
         font-size: 22px;
+        font-family: "Open Sans", sans-serif;
     }
 
 .product_details_text .quantity_box {
@@ -5686,14 +5696,14 @@ i:before {
 
     .product_details_text .quantity_box label {
         font-size: 18px;
-        font-family: "Open Sans", sans-serif;
+        font-family: "Playfair Display", sans-serif;
         font-weight: 600;
         color: #242424;
         padding-right: 25px;
     }
 
     .product_details_text .quantity_box input {
-        width: 40px;
+        width: 50px;
         height: 35px;
         border: 1px solid #eaeaea;
         text-align: center;
@@ -5791,7 +5801,7 @@ i:before {
 
     .product_tab_area .tab-content .tab-pane p {
         font-size: 16px;
-        font-family: "Open Sans", sans-serif;
+        font-family: "Playfair Display", sans-serif;
         line-height: 26px;
         color: #797979;
         margin-bottom: 30px;
@@ -5805,9 +5815,13 @@ i:before {
     background: #f6f6f6;
 }
 
-    .similar_product_area .main_title h2 {
-        margin-bottom: 0px;
-    }
+.similar_product_area .p100 {
+    padding:40px;
+}
+
+.similar_product_area .main_title h2 {
+    margin-bottom: 0px;
+}
 
 /* Product Details Area css
 ============================================================================================ */

@@ -23,5 +23,15 @@ namespace HPCakes.Controllers
                     select t;
             return PartialView(v.ToList());
         }
+
+        public ActionResult getCategoryRec()
+        {
+            ViewBag.meta = "san-pham";
+            var v = from t in _db.categories
+                    where t.hide == true
+                    orderby t.order ascending
+                    select t;
+            return PartialView(v.ToList());
+        }
     }
 }

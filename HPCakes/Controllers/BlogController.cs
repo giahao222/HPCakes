@@ -47,5 +47,15 @@ namespace HPCakes.Controllers
             IPagedList<news> pagedProducts = news.ToPagedList(pageNumber, pageSize);
             return PartialView(pagedProducts);
         }
+
+        public ActionResult getBlogCate()
+        {
+            ViewBag.meta = "san-pham";
+            var v = from t in _db.categories
+                    where t.hide == true
+                    orderby t.order ascending
+                    select t;
+            return PartialView(v.ToList());
+        }
     }
 }

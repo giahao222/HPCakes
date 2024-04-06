@@ -40,9 +40,9 @@
                 <div class="product_details_text">
                     <h4>@Model.name</h4>
                     <p>@Model.description</p>
-                    <h5>Price :<span>@Model.price vnđ</span></h5>
+                    <h5>Giá : <span>@Model.price vnđ</span></h5>
                     <div class="quantity_box">
-                        <label for="quantity">Quantity :</label>
+                        <label for="quantity">Số lượng :</label>
                         <input type="text" placeholder="1" id="quantity">
                     </div>
                     <a class="pink_more add-to-cart-btn" href="#" data-product-id="@Model.id">Add to Cart</a>
@@ -76,14 +76,15 @@
 </section>
 <!--================End Product Details Area =================-->
 <!--================Similar Product Area =================-->
-<section class="similar_product_area p_100">
-    <div class="container">
-        <div class="main_title">
-            <h2>Similar Products</h2>
+@*<section class="similar_product_area p_100">
+        <div class="container">
+            <div class="main_title">
+                <h2>Similar Products</h2>
+            </div>
+            <div class="row similar_product_inner">
+                @Html.Action("getProductRecommend", "Product", new { id = Model.categoryid })
+            </div>
         </div>
-        <div class="row similar_product_inner">
-            @Html.Action("getProductRecommend", "Product", new { id = Model.categoryid })
-        </div>
-    </div>
-</section>
+    </section>*@
+@Html.Action("getProductRecommend", "Product", new { id = Model.categoryid })
 <!--================End Similar Product Area =================-->

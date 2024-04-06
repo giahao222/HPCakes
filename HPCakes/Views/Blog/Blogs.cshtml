@@ -10,8 +10,8 @@
         <div class="banner_text">
             <h3>Blog</h3>
             <ul>
-                <li><a href="index.html">Home</a></li>
-                <li><a href="blog.html">Blog</a></li>
+                <li><a href="/trang-chu">Home</a></li>
+                <li><a href="/tin-tuc">Blog</a></li>
             </ul>
         </div>
     </div>
@@ -41,14 +41,7 @@
                         <div class="r_title">
                             <h3>Categories</h3>
                         </div>
-                        <ul class="list_style">
-                            <li><a href="#">Chocolates<i class="fa fa-angle-right" aria-hidden="true"></i></a></li>
-                            <li><a href="#">Summer Caket<i class="fa fa-angle-right" aria-hidden="true"></i></a></li>
-                            <li><a href="#">Ice Cream<i class="fa fa-angle-right" aria-hidden="true"></i></a></li>
-                            <li><a href="#">Lollipop<i class="fa fa-angle-right" aria-hidden="true"></i></a></li>
-                            <li><a href="#">Sweet<i class="fa fa-angle-right" aria-hidden="true"></i></a></li>
-                            <li><a href="#">Bakery<i class="fa fa-angle-right" aria-hidden="true"></i></a></li>
-                        </ul>
+                        @Html.Action("getBlogCate", "Blog")
                     </aside>
                     <aside class="r_widget recent_widget">
                         <div class="r_title">
