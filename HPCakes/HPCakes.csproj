@@ -147,6 +147,7 @@
     <Compile Include="Controllers\AboutUsController.cs" />
     <Compile Include="Controllers\BlogController.cs" />
     <Compile Include="Controllers\CartController.cs" />
+    <Compile Include="Controllers\ContactUsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Controllers\TempController.cs" />
@@ -4700,6 +4701,7 @@
     <Content Include="Views\Cart\Index.cshtml" />
     <Content Include="Views\AboutUs\getCategoryRec.cshtml" />
     <Content Include="Views\Blog\getBlogCate.cshtml" />
+    <Content Include="Views\ContactUs\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

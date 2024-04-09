@@ -74,18 +74,6 @@ namespace HPCakes
             );
 
             routes.MapRoute(
-                "Contact Us",
-                "{type}/{meta}",
-                new { controller = "ContactUs", action = "ContactUs", meta = UrlParameter.Optional },
-                new RouteValueDictionary {
-                    {
-                        "type","lien-he"
-                    }
-                },
-                namespaces: new[] { "HPCakes.Controllers" }
-            );
-
-            routes.MapRoute(
                 "Home",
                 "{type}/{meta}",
                 new { controller = "Home", action = "Index", meta = UrlParameter.Optional },
@@ -119,6 +107,18 @@ namespace HPCakes
                 new RouteValueDictionary {
                     {
                         "type","gio-hang"
+                    }
+                },
+                new[] { "HPCakes.Controllers" }
+            );
+
+            routes.MapRoute(
+                "Contact Us",
+                "{type}/{meta}",
+                new { controller = "ContactUs", action = "Index", meta = UrlParameter.Optional },
+                new RouteValueDictionary {
+                    {
+                        "type","lien-he"
                     }
                 },
                 new[] { "HPCakes.Controllers" }

@@ -5654,7 +5654,32 @@ i:before {
 }
 
     .product_details_area .product_d_price .product_img {
-        padding-right: 45px;
+        /*padding-right: 45px;*/
+        position: relative;
+        overflow: hidden;
+    }
+        .product_details_area .product_d_price .product_img img {
+            transition: transform 0.5s;
+        }
+
+.zoomed {
+    transform: scale(1.9);
+}
+
+.zoom-overlay {
+    position: absolute;
+    top: 0;
+    right: 100%;
+    width: auto;
+    height: 100%;
+    display: none;
+    overflow: hidden;
+    z-index: 1000;
+}
+
+    .zoom-overlay img {
+        width: 100%;
+        height: auto;
     }
 
 .product_details_text h4 {

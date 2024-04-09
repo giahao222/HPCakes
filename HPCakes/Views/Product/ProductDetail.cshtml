@@ -34,7 +34,12 @@
     <div class="container">
         <div class="row product_d_price">
             <div class="col-lg-6">
-                <div class="product_img"><img class="img-fluid" src="img/product/product-details-1.jpg" alt=""></div>
+                <div class="product_img">
+                    <img class="img-fluid" src="~/img/@Model.img" alt="" id="zoomImage">
+                    <div class="zoom-overlay" id="zoomOverlay">
+                        <img class="img-fluid" src="~/img/@Model.img" alt="">
+                    </div>
+                </div>
             </div>
             <div class="col-lg-6">
                 <div class="product_details_text">
@@ -74,6 +79,32 @@
         </div>
     </div>
 </section>
+<script>
+    const productImg = document.querySelector('.product_img');
+    const zoomImage = document.getElementById('zoomImage');
+    const zoomOverlay = document.getElementById('zoomOverlay');
+
+    productImg.addEventListener('mousemove', (event) => {
+        const boundingRect = productImg.getBoundingClientRect();
+        const offsetX = event.clientX - boundingRect.left;
+        const offsetY = event.clientY - boundingRect.top;
+
+        const percentageX = (offsetX / boundingRect.width) * 100;
+        const percentageY = (offsetY / boundingRect.height) * 100;
+
+        zoomImage.style.transformOrigin = `${percentageX}% ${percentageY}%`;
+        zoomImage.classList.add('zoomed');
+
+        // Hiển thị khung ảnh overlay và đặt vị trí bên phải của hình ảnh gốc
+        zoomOverlay.style.display = 'block';
+        zoomOverlay.querySelector('img').style.transform = `translate(100%, -${percentageY}%)`;
+    });
+
+    productImg.addEventListener('mouseleave', () => {
+        zoomImage.classList.remove('zoomed');
+        zoomOverlay.style.display = 'none';
+    });
+</script>
 <!--================End Product Details Area =================-->
 <!--================Similar Product Area =================-->
 @*<section class="similar_product_area p_100">
