@@ -5,8 +5,6 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
       <Schema Namespace="cakeshopModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'cakeshop.dbo.category' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="category">
           <Key>
             <PropertyRef Name="id" />
@@ -61,18 +59,31 @@ warning 6002: The table/view 'cakeshop.dbo.news' does not have a primary key def
           <Property Name="datebegin" Type="smalldatetime" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'cakeshop.dbo.product' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'cakeshop.dbo.orders' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="orders">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="oderDate" Type="datetime" />
+          <Property Name="customerName" Type="nvarchar" MaxLength="100" />
+          <Property Name="productName" Type="nvarchar(max)" />
+          <Property Name="quantity" Type="int" />
+          <Property Name="price" Type="float" />
+          <Property Name="totalAmount" Type="float" />
+          <Property Name="payment" Type="nvarchar" MaxLength="50" />
+          <Property Name="lastUpdateDate" Type="datetime" />
+        </EntityType>
         <EntityType Name="product">
           <Key>
             <PropertyRef Name="id" />
-            <PropertyRef Name="categoryid" />
           </Key>
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="categoryid" Type="int" Nullable="false" />
           <Property Name="name" Type="nvarchar" MaxLength="50" />
           <Property Name="price" Type="float" />
           <Property Name="img" Type="nvarchar(max)" />
-          <Property Name="description" Type="ntext" />
+          <Property Name="description" Type="nvarchar(max)" />
           <Property Name="size" Type="nvarchar" MaxLength="10" />
           <Property Name="meta" Type="nvarchar(max)" />
           <Property Name="hide" Type="bit" />
@@ -100,16 +111,8 @@ warning 6002: The table/view 'cakeshop.dbo.team' does not have a primary key def
           <Property Name="order" Type="int" />
         </EntityType>
         <EntityContainer Name="cakeshopModelStoreContainer">
-          <EntitySet Name="category" EntityType="Self.category" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [category].[id] AS [id], 
-    [category].[name] AS [name], 
-    [category].[meta] AS [meta], 
-    [category].[hide] AS [hide], 
-    [category].[order] AS [order], 
-    [category].[datebegin] AS [datebegin]
-    FROM [dbo].[category] AS [category]</DefiningQuery>
-          </EntitySet>
+          <EntitySet Name="category" EntityType="Self.category" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="product" EntityType="Self.product" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="contact_us" EntityType="Self.contact_us" store:Type="Tables" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [contact_us].[address] AS [address], 
@@ -141,20 +144,18 @@ warning 6002: The table/view 'cakeshop.dbo.team' does not have a primary key def
     [news].[datebegin] AS [datebegin]
     FROM [dbo].[news] AS [news]</DefiningQuery>
           </EntitySet>
-          <EntitySet Name="product" EntityType="Self.product" store:Type="Tables" store:Schema="dbo">
+          <EntitySet Name="orders" EntityType="Self.orders" store:Type="Tables" store:Schema="dbo">
             <DefiningQuery>SELECT 
-    [product].[id] AS [id], 
-    [product].[categoryid] AS [categoryid], 
-    [product].[name] AS [name], 
-    [product].[price] AS [price], 
-    [product].[img] AS [img], 
-    [product].[description] AS [description], 
-    [product].[size] AS [size], 
-    [product].[meta] AS [meta], 
-    [product].[hide] AS [hide], 
-    [product].[order] AS [order], 
-    [product].[datebegin] AS [datebegin]
-    FROM [dbo].[product] AS [product]</DefiningQuery>
+    [orders].[id] AS [id], 
+    [orders].[oderDate] AS [oderDate], 
+    [orders].[customerName] AS [customerName], 
+    [orders].[productName] AS [productName], 
+    [orders].[quantity] AS [quantity], 
+    [orders].[price] AS [price], 
+    [orders].[totalAmount] AS [totalAmount], 
+    [orders].[payment] AS [payment], 
+    [orders].[lastUpdateDate] AS [lastUpdateDate]
+    FROM [dbo].[orders] AS [orders]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="team" EntityType="Self.team" store:Type="Tables" store:Schema="dbo">
             <DefiningQuery>SELECT 
@@ -188,7 +189,23 @@ warning 6002: The table/view 'cakeshop.dbo.team' does not have a primary key def
           <Property Name="meta" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="hide" Type="Boolean" />
           <Property Name="order" Type="Int32" />
-          <Property Name="datebegin" Type="DateTime" Precision="0" />
+          <Property Name="datebegin" Type="DateTime" />
+        </EntityType>
+        <EntityType Name="product">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="categoryid" Type="Int32" Nullable="false" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="price" Type="Double" />
+          <Property Name="img" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="size" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="meta" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="hide" Type="Boolean" />
+          <Property Name="order" Type="Int32" />
+          <Property Name="datebegin" Type="DateTime" />
         </EntityType>
         <EntityType Name="contact_us">
           <Key>
@@ -209,7 +226,7 @@ warning 6002: The table/view 'cakeshop.dbo.team' does not have a primary key def
           <Property Name="meta" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="hide" Type="Boolean" />
           <Property Name="order" Type="Int32" />
-          <Property Name="datebegin" Type="DateTime" Precision="0" />
+          <Property Name="datebegin" Type="DateTime" />
         </EntityType>
         <EntityType Name="news">
           <Key>
@@ -224,24 +241,21 @@ warning 6002: The table/view 'cakeshop.dbo.team' does not have a primary key def
           <Property Name="meta" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="hide" Type="Boolean" />
           <Property Name="order" Type="Int32" />
-          <Property Name="datebegin" Type="DateTime" Precision="0" />
+          <Property Name="datebegin" Type="DateTime" />
         </EntityType>
-        <EntityType Name="product">
+        <EntityType Name="order">
           <Key>
             <PropertyRef Name="id" />
-            <PropertyRef Name="categoryid" />
           </Key>
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="categoryid" Type="Int32" Nullable="false" />
-          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="oderDate" Type="DateTime" />
+          <Property Name="customerName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="productName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="quantity" Type="Int32" />
           <Property Name="price" Type="Double" />
-          <Property Name="img" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="size" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
-          <Property Name="meta" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="hide" Type="Boolean" />
-          <Property Name="order" Type="Int32" />
-          <Property Name="datebegin" Type="DateTime" Precision="0" />
+          <Property Name="totalAmount" Type="Double" />
+          <Property Name="payment" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="lastUpdateDate" Type="DateTime" />
         </EntityType>
         <EntityType Name="team">
           <Key>
@@ -257,16 +271,17 @@ warning 6002: The table/view 'cakeshop.dbo.team' does not have a primary key def
           <Property Name="linked_in" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="email" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="phone" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
-          <Property Name="date_of_birth" Type="DateTime" Precision="0" />
+          <Property Name="date_of_birth" Type="DateTime" />
           <Property Name="hide" Type="Boolean" />
           <Property Name="order" Type="Int32" />
         </EntityType>
         <EntityContainer Name="cakeshopEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="categories" EntityType="Self.category" />
+          <EntitySet Name="products" EntityType="Self.product" />
           <EntitySet Name="contact_us" EntityType="Self.contact_us" />
           <EntitySet Name="menus" EntityType="Self.menu" />
           <EntitySet Name="news" EntityType="Self.news" />
-          <EntitySet Name="products" EntityType="Self.product" />
+          <EntitySet Name="orders" EntityType="Self.order" />
           <EntitySet Name="teams" EntityType="Self.team" />
         </EntityContainer>
       </Schema>
@@ -280,6 +295,23 @@ warning 6002: The table/view 'cakeshop.dbo.team' does not have a primary key def
               <MappingFragment StoreEntitySet="category">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="meta" ColumnName="meta" />
+                <ScalarProperty Name="hide" ColumnName="hide" />
+                <ScalarProperty Name="order" ColumnName="order" />
+                <ScalarProperty Name="datebegin" ColumnName="datebegin" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="products">
+            <EntityTypeMapping TypeName="cakeshopModel.product">
+              <MappingFragment StoreEntitySet="product">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="categoryid" ColumnName="categoryid" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="price" ColumnName="price" />
+                <ScalarProperty Name="img" ColumnName="img" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="size" ColumnName="size" />
                 <ScalarProperty Name="meta" ColumnName="meta" />
                 <ScalarProperty Name="hide" ColumnName="hide" />
                 <ScalarProperty Name="order" ColumnName="order" />
@@ -324,20 +356,18 @@ warning 6002: The table/view 'cakeshop.dbo.team' does not have a primary key def
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="products">
-            <EntityTypeMapping TypeName="cakeshopModel.product">
-              <MappingFragment StoreEntitySet="product">
+          <EntitySetMapping Name="orders">
+            <EntityTypeMapping TypeName="cakeshopModel.order">
+              <MappingFragment StoreEntitySet="orders">
                 <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="categoryid" ColumnName="categoryid" />
-                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="oderDate" ColumnName="oderDate" />
+                <ScalarProperty Name="customerName" ColumnName="customerName" />
+                <ScalarProperty Name="productName" ColumnName="productName" />
+                <ScalarProperty Name="quantity" ColumnName="quantity" />
                 <ScalarProperty Name="price" ColumnName="price" />
-                <ScalarProperty Name="img" ColumnName="img" />
-                <ScalarProperty Name="description" ColumnName="description" />
-                <ScalarProperty Name="size" ColumnName="size" />
-                <ScalarProperty Name="meta" ColumnName="meta" />
-                <ScalarProperty Name="hide" ColumnName="hide" />
-                <ScalarProperty Name="order" ColumnName="order" />
-                <ScalarProperty Name="datebegin" ColumnName="datebegin" />
+                <ScalarProperty Name="totalAmount" ColumnName="totalAmount" />
+                <ScalarProperty Name="payment" ColumnName="payment" />
+                <ScalarProperty Name="lastUpdateDate" ColumnName="lastUpdateDate" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -377,7 +407,6 @@ warning 6002: The table/view 'cakeshop.dbo.team' does not have a primary key def
         <DesignerProperty Name="EnablePluralization" Value="true" />
         <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
         <DesignerProperty Name="UseLegacyProvider" Value="false" />
-        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
       </DesignerInfoPropertySet>
     </Options>
     <!-- Diagram content (shape and connector positions) -->

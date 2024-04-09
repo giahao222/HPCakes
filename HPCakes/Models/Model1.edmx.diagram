@@ -4,13 +4,14 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="fb1f7546cda842c58fb6ded8439c4582" Name="Diagram1">
+      <Diagram DiagramId="2b8494ba87904198bbc6e216d058147d" Name="Diagram1">
         <EntityTypeShape EntityType="cakeshopModel.category" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="cakeshopModel.contact_us" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="cakeshopModel.menu" Width="1.5" PointX="0.75" PointY="3.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="cakeshopModel.news" Width="1.5" PointX="2.75" PointY="3.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="cakeshopModel.product" Width="1.5" PointX="4.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="cakeshopModel.team" Width="1.5" PointX="4.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="cakeshopModel.product" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="cakeshopModel.contact_us" Width="1.5" PointX="0.625" PointY="3.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="cakeshopModel.menu" Width="1.5" PointX="7.125" PointY="3.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="cakeshopModel.news" Width="1.5" PointX="4.625" PointY="0.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="cakeshopModel.order" Width="1.5" PointX="6.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="cakeshopModel.team" Width="1.5" PointX="9.375" PointY="0.5" IsExpanded="true" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
