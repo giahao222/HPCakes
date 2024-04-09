@@ -25,5 +25,7 @@ namespace HPCakes.Models
         public Nullable<bool> hide { get; set; }
         public Nullable<int> order { get; set; }
         public Nullable<System.DateTime> datebegin { get; set; }
+    
+        public virtual category category { get; set; }
     }
 }

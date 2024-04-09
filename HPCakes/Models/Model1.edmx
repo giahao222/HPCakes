@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="cakeshopModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="cakeshopModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="category">
           <Key>
             <PropertyRef Name="id" />
@@ -28,8 +28,6 @@ warning 6002: The table/view 'cakeshop.dbo.contact_us' does not have a primary k
           <Property Name="email" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="phone" Type="nvarchar" MaxLength="20" Nullable="false" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'cakeshop.dbo.menu' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="menu">
           <Key>
             <PropertyRef Name="id" />
@@ -41,8 +39,6 @@ warning 6002: The table/view 'cakeshop.dbo.menu' does not have a primary key def
           <Property Name="order" Type="int" />
           <Property Name="datebegin" Type="smalldatetime" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'cakeshop.dbo.news' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="news">
           <Key>
             <PropertyRef Name="id" />
@@ -58,8 +54,6 @@ warning 6002: The table/view 'cakeshop.dbo.news' does not have a primary key def
           <Property Name="order" Type="int" />
           <Property Name="datebegin" Type="smalldatetime" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'cakeshop.dbo.orders' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="orders">
           <Key>
             <PropertyRef Name="id" />
@@ -100,8 +94,6 @@ warning 6002: The table/view 'cakeshop.dbo.orders' does not have a primary key d
           <Property Name="version" Type="int" />
           <Property Name="definition" Type="varbinary(max)" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'cakeshop.dbo.team' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="team">
           <Key>
             <PropertyRef Name="id" />
@@ -120,10 +112,26 @@ warning 6002: The table/view 'cakeshop.dbo.team' does not have a primary key def
           <Property Name="hide" Type="bit" />
           <Property Name="order" Type="int" />
         </EntityType>
+        <Association Name="FK_product_category">
+          <End Role="category" Type="Self.category" Multiplicity="1" />
+          <End Role="product" Type="Self.product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="category">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="product">
+              <PropertyRef Name="categoryid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="cakeshopModelStoreContainer">
           <EntitySet Name="category" EntityType="Self.category" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="menu" EntityType="Self.menu" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="news" EntityType="Self.news" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="orders" EntityType="Self.orders" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="product" EntityType="Self.product" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="team" EntityType="Self.team" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="contact_us" EntityType="Self.contact_us" store:Type="Tables" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [contact_us].[address] AS [address], 
@@ -131,63 +139,12 @@ warning 6002: The table/view 'cakeshop.dbo.team' does not have a primary key def
     [contact_us].[phone] AS [phone]
     FROM [dbo].[contact_us] AS [contact_us]</DefiningQuery>
           </EntitySet>
-          <EntitySet Name="menu" EntityType="Self.menu" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [menu].[id] AS [id], 
-    [menu].[name] AS [name], 
-    [menu].[meta] AS [meta], 
-    [menu].[hide] AS [hide], 
-    [menu].[order] AS [order], 
-    [menu].[datebegin] AS [datebegin]
-    FROM [dbo].[menu] AS [menu]</DefiningQuery>
-          </EntitySet>
-          <EntitySet Name="news" EntityType="Self.news" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [news].[id] AS [id], 
-    [news].[name] AS [name], 
-    [news].[img] AS [img], 
-    [news].[description] AS [description], 
-    [news].[link] AS [link], 
-    [news].[detail] AS [detail], 
-    [news].[meta] AS [meta], 
-    [news].[hide] AS [hide], 
-    [news].[order] AS [order], 
-    [news].[datebegin] AS [datebegin]
-    FROM [dbo].[news] AS [news]</DefiningQuery>
-          </EntitySet>
-          <EntitySet Name="orders" EntityType="Self.orders" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [orders].[id] AS [id], 
-    [orders].[oderDate] AS [oderDate], 
-    [orders].[customerName] AS [customerName], 
-    [orders].[productName] AS [productName], 
-    [orders].[quantity] AS [quantity], 
-    [orders].[price] AS [price], 
-    [orders].[totalAmount] AS [totalAmount], 
-    [orders].[payment] AS [payment], 
-    [orders].[lastUpdateDate] AS [lastUpdateDate]
-    FROM [dbo].[orders] AS [orders]</DefiningQuery>
-          </EntitySet>
-          <EntitySet Name="team" EntityType="Self.team" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [team].[id] AS [id], 
-    [team].[name] AS [name], 
-    [team].[job title] AS [job title], 
-    [team].[img] AS [img], 
-    [team].[twitter] AS [twitter], 
-    [team].[facebook] AS [facebook], 
-    [team].[instagram] AS [instagram], 
-    [team].[linked in] AS [linked in], 
-    [team].[email] AS [email], 
-    [team].[phone] AS [phone], 
-    [team].[date of birth] AS [date of birth], 
-    [team].[hide] AS [hide], 
-    [team].[order] AS [order]
-    FROM [dbo].[team] AS [team]</DefiningQuery>
-          </EntitySet>
+          <AssociationSet Name="FK_product_category" Association="Self.FK_product_category">
+            <End Role="category" EntitySet="category" />
+            <End Role="product" EntitySet="product" />
+          </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="cakeshopModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -201,6 +158,7 @@ warning 6002: The table/view 'cakeshop.dbo.team' does not have a primary key def
           <Property Name="hide" Type="Boolean" />
           <Property Name="order" Type="Int32" />
           <Property Name="datebegin" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="products" Relationship="cakeshopModel.FK_product_category" FromRole="category" ToRole="product" />
         </EntityType>
         <EntityType Name="product">
           <Key>
@@ -217,6 +175,7 @@ warning 6002: The table/view 'cakeshop.dbo.team' does not have a primary key def
           <Property Name="hide" Type="Boolean" />
           <Property Name="order" Type="Int32" />
           <Property Name="datebegin" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="category" Relationship="cakeshopModel.FK_product_category" FromRole="product" ToRole="category" />
         </EntityType>
         <EntityType Name="sysdiagram">
           <Key>
@@ -305,7 +264,23 @@ warning 6002: The table/view 'cakeshop.dbo.team' does not have a primary key def
           <EntitySet Name="news" EntityType="Self.news" />
           <EntitySet Name="orders" EntityType="Self.order" />
           <EntitySet Name="teams" EntityType="Self.team" />
+          <AssociationSet Name="FK_product_category" Association="cakeshopModel.FK_product_category">
+            <End Role="category" EntitySet="categories" />
+            <End Role="product" EntitySet="products" />
+          </AssociationSet>
         </EntityContainer>
+        <Association Name="FK_product_category">
+          <End Type="cakeshopModel.category" Role="category" Multiplicity="1" />
+          <End Type="cakeshopModel.product" Role="product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="category">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="product">
+              <PropertyRef Name="categoryid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->

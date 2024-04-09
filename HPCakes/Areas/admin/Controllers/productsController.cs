@@ -68,7 +68,7 @@ namespace HPCakes.Areas.admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "id,name,price,img,description,meta,size,hdie,order,datebegin,categoryid")] product product, HttpPostedFileBase img)
+        public ActionResult Create([Bind(Include = "id,categoryid,name,price,img,description,meta,size,hdie,order,datebegin")] product product, HttpPostedFileBase img)
         {
             try
             {
@@ -94,7 +94,7 @@ namespace HPCakes.Areas.admin.Controllers
                     db.products.Add(product);
                     db.SaveChanges();
                     //return RedirectToAction("Index");
-                    return RedirectToAction("Index", "product", new { id = product.categoryid });
+                    return RedirectToAction("Index", "products", new { id = product.categoryid });
                 }
             }
             catch (DbEntityValidationException e)
@@ -158,7 +158,7 @@ namespace HPCakes.Areas.admin.Controllers
                     db.Entry(temp).State = EntityState.Modified;
                     db.SaveChanges();
                     //return RedirectToAction("Index");
-                    return RedirectToAction("Index", "product", new { id = product.categoryid });
+                    return RedirectToAction("Index", "products", new { id = product.categoryid });
                 }
             }
             catch (DbEntityValidationException e)

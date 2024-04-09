@@ -52,8 +52,8 @@ namespace HPCakes.Areas.admin.Controllers
         [ValidateInput(false)]
         public ActionResult Create([Bind(Include = "id,name,img,description,detail,meta,hide,order,datebegin")] news news, HttpPostedFileBase img)
         {
-            try
-            {
+           // try
+           // {
                 var path = "";
                 var filename = "";
                 if (ModelState.IsValid)
@@ -76,15 +76,15 @@ namespace HPCakes.Areas.admin.Controllers
                     db.SaveChanges();
                     return RedirectToAction("Index");
                 }
-            }
-            catch (DbEntityValidationException e)
+            //}
+            /*catch (DbEntityValidationException e)
             {
                 throw e;
             }
             catch (Exception ex)
             {
                 throw ex;
-            }
+            }*/
 
             return View(news);
         }
