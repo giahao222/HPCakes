@@ -139,7 +139,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Areas\admin\adminAreaRegistration.cs" />
-    <Compile Include="Areas\admin\Controllers\CategoryController.cs" />
+    <Compile Include="Areas\admin\Controllers\categoriesController.cs" />
     <Compile Include="Areas\admin\Controllers\HomeController.cs" />
     <Compile Include="Areas\admin\Controllers\menusController.cs" />
     <Compile Include="Areas\admin\Controllers\newsController.cs" />
@@ -4762,6 +4762,11 @@
       <DependentUpon>Model1.edmx</DependentUpon>
     </Content>
     <Content Include="Areas\admin\Views\Home\Login.cshtml" />
+    <Content Include="Areas\admin\Views\categories\Create.cshtml" />
+    <Content Include="Areas\admin\Views\categories\Delete.cshtml" />
+    <Content Include="Areas\admin\Views\categories\Details.cshtml" />
+    <Content Include="Areas\admin\Views\categories\Edit.cshtml" />
+    <Content Include="Areas\admin\Views\categories\Index.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
