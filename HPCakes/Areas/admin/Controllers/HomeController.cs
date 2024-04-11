@@ -13,5 +13,9 @@ namespace HPCakes.Areas.admin.Controllers
         {
             return View();
         }
+        public ActionResult Login()
+        {
+            return View();
+        }
     }
 }
