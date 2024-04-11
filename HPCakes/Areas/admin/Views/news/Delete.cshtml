@@ -87,15 +87,22 @@
 
         </dl>
 
-        @using (Html.BeginForm())
+        @using (Html.BeginForm("Delete", "news", FormMethod.Post, new { onsubmit = "return confirmDelete();" }))
         {
             @Html.AntiForgeryToken()
 
             <div class="form-actions no-color">
-                <input type="submit" value="Delete" class="btn btn-default" /> |
+                <input type="submit" value="Delete" class="btn btn-danger" /> |
                 @Html.ActionLink("Back to List", "Index")
             </div>
         }
+
     </div>
 
 </div>
+
+<script>
+    function confirmDelete() {
+        return confirm('Bạn có chắc chắn muốn xóa tin này?');
+    }
+</script>

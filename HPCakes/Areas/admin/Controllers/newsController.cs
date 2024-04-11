@@ -109,6 +109,7 @@ namespace HPCakes.Areas.admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [ValidateInput(false)]
         public ActionResult Edit([Bind(Include = "id,name,img,description,link,detail,meta,hide,order,datebegin")] news news)
         {
             if (ModelState.IsValid)

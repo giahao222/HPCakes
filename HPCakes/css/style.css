@@ -2256,7 +2256,7 @@ i:before {
     text-align: center;
     background: url(../img/error-bg.jpg) no-repeat scroll center center;
     background-size: cover;
-    min-height: 834px;
+    min-height: 950px;
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;

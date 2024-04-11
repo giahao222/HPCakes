@@ -260,7 +260,7 @@
                         </li>
                         <li class="divider"></li>
                         <li>
-                            <a href="login.html"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                            <a href="#" id="logoutBtn" class="btn btn-danger">Logout</a>
                         </li>
                     </ul>
                     <!-- /.dropdown-user -->
@@ -276,13 +276,29 @@
                             <a href="@Url.Action("Index", "menus")"><i class="fa fa-th-list fa-fw"></i> Quản lý Menu</a>
                         </li>
                         <li>
-                            <a href="@Url.Action("Index", "menus")"><i class="fa fa-th-list fa-fw"></i> Quản lý Giỏ hàng</a>
+                            <a href="@Url.Action("Index", "menus")"><i class="fa fa-th-list fa-fw"></i> Quản lý Đơn hàng</a>
                         </li>
                         <li>
-                            <a href="@Url.Action("Index", "news")"><i class="fa fa-th-list fa-fw"></i> Quản lý Tin tức</a>
+                            <a href="#"><i class="fa fa-sitemap fa-fw"></i> Quản lý Tin tức<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                <li>
+                                    <a href="@Url.Action("Index", "news")"><i class="fa fa-th-list fa-fw"></i> Tin tức</a>
+                                </li>
+                                <li>
+                                    <a href="@Url.Action("Index", "categories")"><i class="fa fa-table fa-fw"></i> Thể loại</a>
+                                </li>
+                            </ul>
                         </li>
                         <li>
-                            <a href="@Url.Action("Index", "products")"><i class="fa fa-table fa-fw"></i> Quản lý Sản phẩm</a>
+                            <a href="#"><i class="fa fa-sitemap fa-fw"></i> Quản lý Sản phẩm<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                <li>
+                                    <a href="@Url.Action("Index", "products")"><i class="fa fa-table fa-fw"></i> Sản phẩm</a>
+                                </li>
+                                <li>
+                                    <a href="@Url.Action("Index", "categories")"><i class="fa fa-table fa-fw"></i> Thể loại</a>
+                                </li>
+                            </ul>
                         </li>
                         <li>
                             <a href="@Url.Action("Index", "menus")"><i class="fa fa-th-list fa-fw"></i> Quản lý Liên hệ</a>
@@ -323,3 +339,16 @@
 </body>
 
 </html>
+
+<script>
+    document.getElementById('logoutBtn').addEventListener('click', function (event) {
+        event.preventDefault(); // Ngăn chặn hành động mặc định của thẻ a
+
+        // Xử lý đăng xuất ở đây
+        // Ví dụ: xoá các dữ liệu phiên, cookie, hoặc thực hiện các hành động cần thiết
+
+        // Sau khi xử lý đăng xuất, chuyển hướng người dùng đến trang đăng nhập hoặc bất kỳ trang nào khác
+        window.location.href = 'Login'; // Thay đổi '/login' bằng đường dẫn tới trang đăng nhập của bạn
+    });
+
+</script>

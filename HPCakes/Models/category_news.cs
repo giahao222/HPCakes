@@ -12,15 +12,10 @@ namespace HPCakes.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class news
+    public partial class category_news
     {
         public int id { get; set; }
-        public Nullable<int> categoryid { get; set; }
         public string name { get; set; }
-        public string img { get; set; }
-        public string description { get; set; }
-        public string link { get; set; }
-        public string detail { get; set; }
         public string meta { get; set; }
         public Nullable<bool> hide { get; set; }
         public Nullable<int> order { get; set; }
