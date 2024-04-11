@@ -88,15 +88,16 @@
                         </dd>
 
                     </dl>
-                    @using (Html.BeginForm())
+                    @using (Html.BeginForm("Delete", "products", FormMethod.Post, new { onsubmit = "return confirmDelete();" }))
                     {
                         @Html.AntiForgeryToken()
 
                         <div class="form-actions no-color">
-                            <input type="submit" value="Delete" class="btn btn-default" /> |
+                            <input type="submit" value="Delete" class="btn btn-danger" /> |
                             @Html.ActionLink("Back to List", "Index")
                         </div>
                     }
+
                 </div>
                 <!-- /.panel-body -->
             </div>
@@ -105,3 +106,9 @@
         <!-- /.col-lg-12 -->
     </div>
 </div>
+
+<script>
+    function confirmDelete() {
+        return confirm('Bạn có chắc chắn muốn xóa sản phẩm này?');
+    }
+</script>
