@@ -113,6 +113,18 @@ namespace HPCakes
             );
 
             routes.MapRoute(
+                "Payment",
+                "{type}/{meta}",
+                new { controller = "Payment", action = "Index", meta = UrlParameter.Optional },
+                new RouteValueDictionary {
+                    {
+                        "type","thanh-toan"
+                    }
+                },
+                new[] { "HPCakes.Controllers" }
+            );
+
+            routes.MapRoute(
                 "Contact Us",
                 "{type}/{meta}",
                 new { controller = "ContactUs", action = "Index", meta = UrlParameter.Optional },
