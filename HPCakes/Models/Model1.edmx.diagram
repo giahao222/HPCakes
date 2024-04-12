@@ -15,6 +15,7 @@
         <AssociationConnector Association="cakeshopModel.FK_product_category" />
         <EntityTypeShape EntityType="cakeshopModel.category_news" Width="1.5" PointX="8.625" PointY="0.75" />
         <EntityTypeShape EntityType="cakeshopModel.news" Width="1.5" PointX="10.625" PointY="0.75" />
+        <AssociationConnector Association="cakeshopModel.FK_news_category_news" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -139,7 +139,9 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Areas\admin\adminAreaRegistration.cs" />
+    <Compile Include="Areas\admin\Content\pages\News\newsController.cs" />
     <Compile Include="Areas\admin\Controllers\categoriesController.cs" />
+    <Compile Include="Areas\admin\Controllers\category_newsController.cs" />
     <Compile Include="Areas\admin\Controllers\HomeController.cs" />
     <Compile Include="Areas\admin\Controllers\menusController.cs" />
     <Compile Include="Areas\admin\Controllers\newsController.cs" />
@@ -4771,6 +4773,14 @@
     <Content Include="Areas\admin\Views\categories\Details.cshtml" />
     <Content Include="Areas\admin\Views\categories\Edit.cshtml" />
     <Content Include="Areas\admin\Views\categories\Index.cshtml" />
+    <Content Include="Areas\admin\Content\pages\News\Create.cshtml" />
+    <Content Include="Areas\admin\Content\pages\News\Index.cshtml" />
+    <Content Include="Areas\admin\Views\news\getNews.cshtml" />
+    <Content Include="Areas\admin\Views\category_news\Create.cshtml" />
+    <Content Include="Areas\admin\Views\category_news\Delete.cshtml" />
+    <Content Include="Areas\admin\Views\category_news\Details.cshtml" />
+    <Content Include="Areas\admin\Views\category_news\Edit.cshtml" />
+    <Content Include="Areas\admin\Views\category_news\Index.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />

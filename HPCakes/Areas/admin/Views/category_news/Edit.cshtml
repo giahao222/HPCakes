@@ -1,4 +1,4 @@
-﻿@model HPCakes.Models.category
+﻿@model HPCakes.Models.category_news
 
 @{
     ViewBag.Title = "Edit";
@@ -14,7 +14,7 @@
                 </div>
                 <!-- /.panel-heading -->
                 <div class="panel-body">
-                    @using (Html.BeginForm("Edit", "categỏies", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                    @using (Html.BeginForm("Edit", "category_news", FormMethod.Post, new { enctype = "multipart/form-data" }))
                     {
                         @Html.AntiForgeryToken()
                         <div class="form-horizontal">
