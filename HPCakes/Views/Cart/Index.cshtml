@@ -7,37 +7,16 @@
 }
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
-    /*
-    $(document).ready(function () {
-        $(".productQuantity").on('input', function () {
-            updateTotalPrice(this);
-        });
-
-        $(".productQuantity").on('blur', function () {
-            if ($(this).val() === "") {
-                $(this).val("1"); // Nếu ô số lượng trống, thiết lập lại giá trị mặc định là 1
-                updateTotalPrice(this); // Cập nhật lại thành tiền
-            }
-        });
-
-        function updateTotalPrice(input) {
-            var quantity = parseInt($(input).val() || "1"); // Lấy số lượng mới được nhập hoặc sử dụng giá trị mặc định là 1 nếu ô số lượng trống
-            var priceString = $(input).closest("tr").find(".productPrice").text(); // Lấy giá sản phẩm dưới dạng chuỗi
-            var price = parseFloat(priceString.replace(" vnđ", "").replace(",", "")); // Lấy giá trị số và loại bỏ ký tự "vnđ" và dấu phẩy
-            var totalPrice = quantity * price; // Tính toán thành tiền mới
-
-            // Cập nhật giá trị của cột thành tiền tương ứng
-            $(input).closest("tr").find(".productTotalPrice").text(totalPrice.toLocaleString('en-US') + " vnđ");
-        }
-    });
-
     // Hàm tính toán tổng thành tiền của tất cả các sản phẩm
     function calculateTotalPrice() {
         var totalPrice = 0;
-        $(".productTotalPrice").each(function() {
-            var priceString = $(this).text();
+        $(".productQuantity").each(function () {
+            var quantity = parseInt($(this).val() || "1");
+            var priceString = $(this).closest("tr").find(".productPrice").text();
             var price = parseFloat(priceString.replace(" vnđ", "").replace(",", ""));
-            totalPrice += price;
+            var productTotalPrice = quantity * price;
+            $(this).closest("tr").find(".productTotalPrice").text(productTotalPrice.toLocaleString('en-US') + " vnđ");
+            totalPrice += productTotalPrice; // Tính tổng giá trị của các sản phẩm
         });
         return totalPrice;
     }
@@ -46,68 +25,7 @@
     function updateTotals() {
         var totalBeforeDiscount = calculateTotalPrice();
         $(".sub_total span").text(totalBeforeDiscount.toLocaleString('en-US') + " vnđ");
-        // Cập nhật tổng tiền cần thanh toán (nếu cần)
-    }
-
-    // Xóa sản phẩm khỏi giỏ hàng
-    function removeFromCart(productId) {
-        $.ajax({
-            url: "/Cart/RemoveFromCart",
-            type: "POST",
-            data: { productId: productId },
-            success: function (response) {
-                // Cập nhật lại trang khi xóa sản phẩm thành công
-                location.reload();
-            },
-            error: function () {
-                alert("Error removing product from cart!");
-            }
-        });
-    }
-
-    $(document).ready(function () {
-        // Sự kiện khi số lượng sản phẩm thay đổi
-        $(".productQuantity").on('input', function () {
-            updateTotalPrice(this);
-        });
-
-        // Sự kiện khi rời khỏi ô số lượng
-        $(".productQuantity").on('blur', function () {
-            if ($(this).val() === "") {
-                $(this).val("1");
-                updateTotalPrice(this);
-            }
-        });
-
-        // Hàm cập nhật thành tiền của sản phẩm
-        function updateTotalPrice(input) {
-            var quantity = parseInt($(input).val() || "1");
-            var priceString = $(input).closest("tr").find(".productPrice").text();
-            var price = parseFloat(priceString.replace(" vnđ", "").replace(",", ""));
-            var totalPrice = quantity * price;
-            $(input).closest("tr").find(".productTotalPrice").text(totalPrice.toLocaleString('en-US') + " vnđ");
-
-            // Sau khi cập nhật, gọi hàm cập nhật tổng số tiền
-            updateTotals();
-        }
-    });*/
-    /////
-    // Hàm tính toán tổng thành tiền của tất cả các sản phẩm
-    function calculateTotalPrice() {
-        var totalPrice = 0;
-        $(".productTotalPrice").each(function () {
-            var priceString = $(this).text();
-            var price = parseFloat(priceString.replace(" vnđ", "").replace(",", ""));
-            totalPrice += price;
-        });
-        return totalPrice;
-    }
-
-    // Hàm cập nhật tổng thành tiền và tổng tiền cần thanh toán
-    function updateTotals() {
-        var totalBeforeDiscount = calculateTotalPrice();
-        $(".sub_total span").text(totalBeforeDiscount.toLocaleString('en-US') + " vnđ");
-        // Cập nhật tổng tiền cần thanh toán (nếu cần)
+        //$(".total span").text(totalBeforeDiscount.toLocaleString('en-US') + " vnđ"); // Cập nhật tổng tiền cần thanh toán dựa trên tổng giá trị của sản phẩm
     }
 
     // Xóa sản phẩm khỏi giỏ hàng
@@ -153,47 +71,33 @@
             updateTotals();
         }
     });
-</script>
-@*<script>
-    $(document).ready(function () {
-        $(".pest_btn").click(function (e) {
-            e.preventDefault(); // Ngăn chặn hành động mặc định của nút
+////////////////////////////////////////////
+    $(document).ready(function() {
+        $('#useVoucherBtn').click(function() {
+            var voucher = $('#voucherInput').val(); // Lấy giá trị từ input voucher
 
+            // Gửi yêu cầu AJAX
             $.ajax({
-                url: "/Cart/AddToCart", // Đường dẫn đến action AddToCart trong controller
-                type: "POST",
-                success: function (response) {
-                    // Xử lý khi nhận dữ liệu sản phẩm từ server
-                    updateCart(response);
+                url: '/Cart/CheckVoucher', // Đường dẫn đến controller action để kiểm tra voucher
+                type: 'POST',
+                data: { voucher: voucher }, // Dữ liệu gửi đi: voucher
+                success: function(response) {
+                    // Xử lý kết quả trả về từ server
+                    if (response.success) {
+                        alert('Voucher hợp lệ!');
+                        // Nếu voucher hợp lệ, bạn có thể thực hiện các hành động khác ở đây
+                    } else {
+                        alert('Voucher không hợp lệ!');
+                        // Nếu voucher không hợp lệ, bạn có thể thực hiện các hành động khác ở đây
+                    }
                 },
-                error: function () {
-                    // Xử lý khi có lỗi xảy ra
-                    alert("Error adding product to cart!");
+                error: function() {
+                    alert('Đã có lỗi xảy ra!');
                 }
             });
         });
     });
-
-    function updateCart(product) {
-        // Cập nhật thông tin sản phẩm trong trang HTML
-        var tableRow = "<tr>" +
-                        "<td><img src='~/img/"+product.img+"' alt=''></td>" +
-                        "<td>" + product.name + "</td>" +
-                        "<td>" + product.price + " vnđ</td>" +
-                        "<td><select class='product_select'>" +
-                        "<option data-display='1'>1</option>" +
-                        "<option value='1'>2</option>" +
-                        "<option value='2'>3</option>" +
-                        "<option value='4'>4</option>" +
-                        "<option value='5'>5</option>" +
-                        "</select></td>" +
-                        "<td>" + product.price + " vnđ</td>" +
-                        "<td>X</td>" +
-                        "</tr>";
-
-        $("tbody").append(tableRow);
-    }
-</script>*@
+</script>
 
 <!--================Cart Table Area =================-->
 <section class="cart_table_area p_100">
@@ -238,9 +142,9 @@
                     </div>
                     <form class="form-inline">
                         <div class="form-group flex-grow-1">
-                            <input type="text" class="form-control flex-grow-1" placeholder="Voucher">
+                            <input type="text" id="voucherInput" class="form-control flex-grow-1" placeholder="Voucher">
                         </div>
-                        <button type="submit" class="btn btn_coupon">Sử dụng</button>
+                        <button type="submit" id="useVoucherBtn" class="btn btn_coupon">Sử dụng</button>
                     </form>
                     <div class="sub_total">
                         <h5>Tổng tiền trước giảm giá<span></span></h5>

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using HPCakes.Models;
+using Microsoft.Ajax.Utilities;
 
 namespace HPCakes.Controllers
 {
@@ -78,6 +79,53 @@ namespace HPCakes.Controllers
             // Trả về kết quả thành công
             return Json(new { success = true });
         }
+
+        private decimal CalculateDiscountedPrice(decimal totalPrice, int discountPercent)
+        {
+            decimal discountAmount = totalPrice * discountPercent / 100;
+            return totalPrice - discountAmount;
+        }
+
+        [HttpPost]
+        public ActionResult CheckVoucher(string voucher)
+        {
+            /*// Kiểm tra xem voucher có tồn tại trong cơ sở dữ liệu không
+            bool isVoucherValid = CheckVoucherInDatabase(voucher);
+
+            // Trả về kết quả dưới dạng JSON
+            return Json(new { success = isVoucherValid });*/
+
+            // Kiểm tra xem voucher có tồn tại trong cơ sở dữ liệu không
+            var existingVoucher = _db.Vouchers.FirstOrDefault(v => v.Code == voucher);
+
+            if (existingVoucher != null)
+            {
+                // Nếu voucher tồn tại, lấy giá trị của cột value
+                int discountPercent = existingVoucher.Value;
+
+                // Lấy tổng tiền trước giảm giá từ session hoặc tính toán từ giỏ hàng
+                decimal totalPriceBeforeDiscount = CalculateTotalPriceBeforeDiscount();
+
+                // Tính toán giảm giá dựa trên tỷ lệ phần trăm và cập nhật tổng tiền cần thanh toán
+                decimal totalPriceAfterDiscount = CalculateDiscountedPrice(totalPriceBeforeDiscount, discountPercent);
+
+                // Trả về kết quả dưới dạng JSON
+                return Json(new { success = true, totalPriceAfterDiscount = totalPriceAfterDiscount });
+            }
+
+            // Trả về kết quả nếu voucher không hợp lệ
+            return Json(new { success = false });
+        }
+
+        private bool CheckVoucherInDatabase(string voucher)
+        {
+            // Thực hiện kiểm tra voucher trong cơ sở dữ liệu ở đây
+            // Trả về true nếu voucher hợp lệ, ngược lại trả về false
+            var check = _db.vouchers.FirstOrDefault(v => v.name == voucher);
+            // Trả về true nếu voucher được tìm thấy, ngược lại trả về false
+            return check != null;
+        }
+
 
     }
 }
