@@ -1,4 +1,4 @@
-﻿using System;
+﻿/*using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
@@ -18,27 +18,9 @@ namespace HPCakes.Areas.admin.Controllers
         private cakeshopEntities db = new cakeshopEntities();
 
         // GET: admin/news
-        public ActionResult Index(long? id = null)
+        public ActionResult Index()
         {
-            getCategory(id);
-            return View();
-        }
-
-        public void getCategory(long? selectedId = null)
-        {
-            ViewBag.Category_News = new SelectList(db.category_news.Where(x => x.hide == true)
-                .OrderBy(x => x.order), "id", "name", selectedId);
-        }
-
-        public ActionResult getNews(long? id)
-        {
-            if (id == null)
-            {
-                var v = db.news.OrderBy(x => x.order).ToList();
-                return PartialView(v);
-            }
-            var m = db.news.Where(x => x.categoryid == id).OrderBy(x => x.order).ToList();
-            return PartialView(m);
+            return View(db.news.ToList());
         }
 
         // GET: admin/news/Details/5
@@ -59,7 +41,6 @@ namespace HPCakes.Areas.admin.Controllers
         // GET: admin/news/Create
         public ActionResult Create()
         {
-            getCategory();
             return View();
         }
 
@@ -69,10 +50,10 @@ namespace HPCakes.Areas.admin.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [ValidateInput(false)]
-        public ActionResult Create([Bind(Include = "id,categoryid,name,img,description,detail,meta,hide,order,datebegin")] news news, HttpPostedFileBase img)
+        public ActionResult Create([Bind(Include = "id,name,img,description,detail,meta,hide,order,datebegin")] news news, HttpPostedFileBase img)
         {
-           try
-           {
+           // try
+           // {
                 var path = "";
                 var filename = "";
                 if (ModelState.IsValid)
@@ -91,20 +72,19 @@ namespace HPCakes.Areas.admin.Controllers
                     }
                     news.datebegin = Convert.ToDateTime(DateTime.Now.ToShortDateString());
                     news.meta = Functions.ConvertToUnSign(news.meta); //convert Tiếng Việt không dấu
-                    news.order = getMaxOrder(news.categoryid);
                     db.news.Add(news);
                     db.SaveChanges();
-                    return RedirectToAction("Index", "news", new { id = news.categoryid });
+                    return RedirectToAction("Index");
                 }
-            }
-            catch (DbEntityValidationException e)
+            //}
+            *//*catch (DbEntityValidationException e)
             {
                 throw e;
             }
             catch (Exception ex)
             {
                 throw ex;
-            }
+            }*//*
 
             return View(news);
         }
@@ -121,8 +101,6 @@ namespace HPCakes.Areas.admin.Controllers
             {
                 return HttpNotFound();
             }
-
-            getCategory(news.categoryid);
             return View(news);
         }
 
@@ -132,42 +110,13 @@ namespace HPCakes.Areas.admin.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [ValidateInput(false)]
-        public ActionResult Edit([Bind(Include = "id,categoryid,name,img,description,link,detail,meta,hide,order,datebegin")] news news, HttpPostedFileBase img)
+        public ActionResult Edit([Bind(Include = "id,name,img,description,link,detail,meta,hide,order,datebegin")] news news)
         {
-            try
+            if (ModelState.IsValid)
             {
-                var path = "";
-                var filename = "";
-                news temp = db.news.Find(news.id);
-                if (ModelState.IsValid)
-                {
-                    if (img != null)
-                    {
-                        //filename = Guid.NewGuid().ToString() + img.FileName;
-                        filename = DateTime.Now.ToString("dd-MM-yy-hh-mm-ss-") + img.FileName;
-                        path = Path.Combine(Server.MapPath("~/Content/upload/img/news"), filename);
-                        img.SaveAs(path);
-                        temp.img = filename; //Lưu ý
-                    }
-                    // temp.datebegin = Convert.ToDateTime(DateTime.Now.ToShortDateString());                   
-                    temp.name = news.name;
-                    temp.description = news.description;
-                    temp.meta = Functions.ConvertToUnSign(news.meta); //convert Tiếng Việt không dấu
-                    temp.hide = news.hide;
-                    temp.order = news.order;
-                    db.Entry(temp).State = EntityState.Modified;
-                    db.SaveChanges();
-                    //return RedirectToAction("Index");
-                    return RedirectToAction("Index", "news", new { id = news.categoryid });
-                }
-            }
-            catch (DbEntityValidationException e)
-            {
-                throw e;
-            }
-            catch (Exception ex)
-            {
-                throw ex;
+                db.Entry(news).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("Index");
             }
             return View(news);
         }
@@ -206,13 +155,6 @@ namespace HPCakes.Areas.admin.Controllers
             }
             base.Dispose(disposing);
         }
-
-        public int getMaxOrder(long? CategoryId)
-        {
-            if (CategoryId == null)
-                return 1;
-            return db.news.Where(x => x.categoryid == CategoryId).Count();
-        }
     }
 }
-
+*/
