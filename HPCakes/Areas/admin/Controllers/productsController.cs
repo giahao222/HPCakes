@@ -21,6 +21,7 @@ namespace HPCakes.Areas.admin.Controllers
         public ActionResult Index(long? id = null)
         {
             getCategory(id);
+            ViewBag.SelectedCategory = id;
             //return View(db.products.ToList());
             return View();
         }
