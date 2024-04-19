@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="cakeshopModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="cakeshopModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="category">
           <Key>
             <PropertyRef Name="id" />
@@ -74,11 +74,22 @@ warning 6002: The table/view 'cakeshop.dbo.contact_us' does not have a primary k
           <Property Name="oderDate" Type="datetime" />
           <Property Name="customerName" Type="nvarchar" MaxLength="100" />
           <Property Name="productName" Type="nvarchar(max)" />
-          <Property Name="quantity" Type="int" />
-          <Property Name="price" Type="float" />
+          <Property Name="address" Type="nvarchar(max)" />
           <Property Name="totalAmount" Type="float" />
           <Property Name="payment" Type="nvarchar" MaxLength="50" />
           <Property Name="lastUpdateDate" Type="datetime" />
+          <Property Name="orderStatus" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="orders_detail">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="order_id" Type="int" Nullable="false" />
+          <Property Name="product_id" Type="int" />
+          <Property Name="quantity" Type="int" />
+          <Property Name="price" Type="float" />
+          <Property Name="total" Type="float" />
         </EntityType>
         <EntityType Name="product">
           <Key>
@@ -136,6 +147,30 @@ warning 6002: The table/view 'cakeshop.dbo.contact_us' does not have a primary k
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_orders_detail_orders">
+          <End Role="orders" Type="Self.orders" Multiplicity="1" />
+          <End Role="orders_detail" Type="Self.orders_detail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="orders">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="orders_detail">
+              <PropertyRef Name="order_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_orders_detail_product">
+          <End Role="product" Type="Self.product" Multiplicity="0..1" />
+          <End Role="orders_detail" Type="Self.orders_detail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="product">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="orders_detail">
+              <PropertyRef Name="product_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_product_category">
           <End Role="category" Type="Self.category" Multiplicity="1" />
           <End Role="product" Type="Self.product" Multiplicity="*" />
@@ -154,6 +189,7 @@ warning 6002: The table/view 'cakeshop.dbo.contact_us' does not have a primary k
           <EntitySet Name="menu" EntityType="Self.menu" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="news" EntityType="Self.news" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="orders" EntityType="Self.orders" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="orders_detail" EntityType="Self.orders_detail" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="product" EntityType="Self.product" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="team" EntityType="Self.team" Schema="dbo" store:Type="Tables" />
@@ -168,13 +204,20 @@ warning 6002: The table/view 'cakeshop.dbo.contact_us' does not have a primary k
             <End Role="category_news" EntitySet="category_news" />
             <End Role="news" EntitySet="news" />
           </AssociationSet>
+          <AssociationSet Name="FK_orders_detail_orders" Association="Self.FK_orders_detail_orders">
+            <End Role="orders" EntitySet="orders" />
+            <End Role="orders_detail" EntitySet="orders_detail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_orders_detail_product" Association="Self.FK_orders_detail_product">
+            <End Role="product" EntitySet="product" />
+            <End Role="orders_detail" EntitySet="orders_detail" />
+          </AssociationSet>
           <AssociationSet Name="FK_product_category" Association="Self.FK_product_category">
             <End Role="category" EntitySet="category" />
             <End Role="product" EntitySet="product" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="cakeshopModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -230,20 +273,6 @@ warning 6002: The table/view 'cakeshop.dbo.contact_us' does not have a primary k
           <Property Name="datebegin" Type="DateTime" Precision="0" />
           <NavigationProperty Name="category_news" Relationship="Self.FK_news_category_news" FromRole="news" ToRole="category_news" />
         </EntityType>
-        <EntityType Name="order">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="oderDate" Type="DateTime" Precision="3" />
-          <Property Name="customerName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="productName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="quantity" Type="Int32" />
-          <Property Name="price" Type="Double" />
-          <Property Name="totalAmount" Type="Double" />
-          <Property Name="payment" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="lastUpdateDate" Type="DateTime" Precision="3" />
-        </EntityType>
         <EntityType Name="product">
           <Key>
             <PropertyRef Name="id" />
@@ -260,6 +289,7 @@ warning 6002: The table/view 'cakeshop.dbo.contact_us' does not have a primary k
           <Property Name="order" Type="Int32" />
           <Property Name="datebegin" Type="DateTime" Precision="3" />
           <NavigationProperty Name="category" Relationship="Self.FK_product_category" FromRole="product" ToRole="category" />
+          <NavigationProperty Name="orders_detail" Relationship="cakeshopModel.FK_orders_detail_product" FromRole="product" ToRole="orders_detail" />
         </EntityType>
         <EntityType Name="sysdiagram">
           <Key>
@@ -328,7 +358,6 @@ warning 6002: The table/view 'cakeshop.dbo.contact_us' does not have a primary k
           <EntitySet Name="category_news" EntityType="Self.category_news" />
           <EntitySet Name="menus" EntityType="Self.menu" />
           <EntitySet Name="news" EntityType="Self.news" />
-          <EntitySet Name="orders" EntityType="Self.order" />
           <EntitySet Name="products" EntityType="Self.product" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
           <EntitySet Name="teams" EntityType="Self.team" />
@@ -341,7 +370,69 @@ warning 6002: The table/view 'cakeshop.dbo.contact_us' does not have a primary k
             <End Role="category_news" EntitySet="category_news" />
             <End Role="news" EntitySet="news" />
           </AssociationSet>
+          <EntitySet Name="orders_detail" EntityType="cakeshopModel.orders_detail" />
+          <AssociationSet Name="FK_orders_detail_product" Association="cakeshopModel.FK_orders_detail_product">
+            <End Role="product" EntitySet="products" />
+            <End Role="orders_detail" EntitySet="orders_detail" />
+          </AssociationSet>
+          <EntitySet Name="orders" EntityType="cakeshopModel.order" />
+          <AssociationSet Name="FK_orders_detail_orders" Association="cakeshopModel.FK_orders_detail_orders">
+            <End Role="order" EntitySet="orders" />
+            <End Role="orders_detail" EntitySet="orders_detail" />
+          </AssociationSet>
         </EntityContainer>
+        <EntityType Name="orders_detail">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="order_id" Type="Int32" Nullable="false" />
+          <Property Name="product_id" Type="Int32" />
+          <Property Name="quantity" Type="Int32" />
+          <Property Name="price" Type="Double" />
+          <Property Name="total" Type="Double" />
+          <NavigationProperty Name="product" Relationship="cakeshopModel.FK_orders_detail_product" FromRole="orders_detail" ToRole="product" />
+          <NavigationProperty Name="order" Relationship="cakeshopModel.FK_orders_detail_orders" FromRole="orders_detail" ToRole="order" />
+        </EntityType>
+        <Association Name="FK_orders_detail_product">
+          <End Type="cakeshopModel.product" Role="product" Multiplicity="0..1" />
+          <End Type="cakeshopModel.orders_detail" Role="orders_detail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="product">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="orders_detail">
+              <PropertyRef Name="product_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="order">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="oderDate" Type="DateTime" Precision="3" />
+          <Property Name="customerName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="productName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="address" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="totalAmount" Type="Double" />
+          <Property Name="payment" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="lastUpdateDate" Type="DateTime" Precision="3" />
+          <Property Name="orderStatus" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="orders_detail" Relationship="cakeshopModel.FK_orders_detail_orders" FromRole="order" ToRole="orders_detail" />
+        </EntityType>
+        <Association Name="FK_orders_detail_orders">
+          <End Type="cakeshopModel.order" Role="order" Multiplicity="1" />
+          <End Type="cakeshopModel.orders_detail" Role="orders_detail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="order">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="orders_detail">
+              <PropertyRef Name="order_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -401,21 +492,6 @@ warning 6002: The table/view 'cakeshop.dbo.contact_us' does not have a primary k
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="orders">
-            <EntityTypeMapping TypeName="cakeshopModel.order">
-              <MappingFragment StoreEntitySet="orders">
-                <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="oderDate" ColumnName="oderDate" />
-                <ScalarProperty Name="customerName" ColumnName="customerName" />
-                <ScalarProperty Name="productName" ColumnName="productName" />
-                <ScalarProperty Name="quantity" ColumnName="quantity" />
-                <ScalarProperty Name="price" ColumnName="price" />
-                <ScalarProperty Name="totalAmount" ColumnName="totalAmount" />
-                <ScalarProperty Name="payment" ColumnName="payment" />
-                <ScalarProperty Name="lastUpdateDate" ColumnName="lastUpdateDate" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="products">
             <EntityTypeMapping TypeName="cakeshopModel.product">
               <MappingFragment StoreEntitySet="product">
@@ -469,6 +545,33 @@ warning 6002: The table/view 'cakeshop.dbo.contact_us' does not have a primary k
                 <ScalarProperty Name="address" ColumnName="address" />
                 <ScalarProperty Name="email" ColumnName="email" />
                 <ScalarProperty Name="phone" ColumnName="phone" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="orders_detail">
+            <EntityTypeMapping TypeName="cakeshopModel.orders_detail">
+              <MappingFragment StoreEntitySet="orders_detail">
+                <ScalarProperty Name="total" ColumnName="total" />
+                <ScalarProperty Name="price" ColumnName="price" />
+                <ScalarProperty Name="quantity" ColumnName="quantity" />
+                <ScalarProperty Name="product_id" ColumnName="product_id" />
+                <ScalarProperty Name="order_id" ColumnName="order_id" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="orders">
+            <EntityTypeMapping TypeName="cakeshopModel.order">
+              <MappingFragment StoreEntitySet="orders">
+                <ScalarProperty Name="orderStatus" ColumnName="orderStatus" />
+                <ScalarProperty Name="lastUpdateDate" ColumnName="lastUpdateDate" />
+                <ScalarProperty Name="payment" ColumnName="payment" />
+                <ScalarProperty Name="totalAmount" ColumnName="totalAmount" />
+                <ScalarProperty Name="address" ColumnName="address" />
+                <ScalarProperty Name="productName" ColumnName="productName" />
+                <ScalarProperty Name="customerName" ColumnName="customerName" />
+                <ScalarProperty Name="oderDate" ColumnName="oderDate" />
+                <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

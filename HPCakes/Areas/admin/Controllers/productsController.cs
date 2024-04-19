@@ -133,7 +133,7 @@ namespace HPCakes.Areas.admin.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [ValidateInput(false)]
-        public ActionResult Edit([Bind(Include = "id,name,price,img,description,meta,size,hdie,order,datebegin,categoryid")] product product, HttpPostedFileBase img)
+        public ActionResult Edit([Bind(Include = "id,categoryid,name,price,img,description,meta,size,hdie,order,datebegin")] product product, HttpPostedFileBase img)
         {
             try
             {

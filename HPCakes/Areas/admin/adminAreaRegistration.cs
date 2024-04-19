@@ -17,7 +17,7 @@ namespace HPCakes.Areas.admin
             context.MapRoute(
                 "admin_default",
                 "admin/{controller}/{action}/{id}",
-                new { controller = "Home",action = "Login", id = UrlParameter.Optional }
+                new { controller = "Home",action = "Index", id = UrlParameter.Optional }
             );
         }
     }

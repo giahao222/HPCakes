@@ -14,6 +14,12 @@ namespace HPCakes.Models
     
     public partial class product
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public product()
+        {
+            this.orders_detail = new HashSet<orders_detail>();
+        }
+    
         public int id { get; set; }
         public int categoryid { get; set; }
         public string name { get; set; }
@@ -27,5 +33,7 @@ namespace HPCakes.Models
         public Nullable<System.DateTime> datebegin { get; set; }
     
         public virtual category category { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<orders_detail> orders_detail { get; set; }
     }
 }

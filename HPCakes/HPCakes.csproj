@@ -139,12 +139,13 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Areas\admin\adminAreaRegistration.cs" />
-    <Compile Include="Areas\admin\Content\pages\News\newsController.cs" />
     <Compile Include="Areas\admin\Controllers\categoriesController.cs" />
     <Compile Include="Areas\admin\Controllers\category_newsController.cs" />
     <Compile Include="Areas\admin\Controllers\HomeController.cs" />
     <Compile Include="Areas\admin\Controllers\menusController.cs" />
     <Compile Include="Areas\admin\Controllers\newsController.cs" />
+    <Compile Include="Areas\admin\Controllers\ordersController.cs" />
+    <Compile Include="Areas\admin\Controllers\orders_detailController.cs" />
     <Compile Include="Areas\admin\Controllers\productsController.cs" />
     <Compile Include="Controllers\AboutUsController.cs" />
     <Compile Include="Controllers\BlogController.cs" />
@@ -189,6 +190,9 @@
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\order.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\orders_detail.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\product.cs">
@@ -4766,8 +4770,6 @@
     <Content Include="Areas\admin\Views\categories\Details.cshtml" />
     <Content Include="Areas\admin\Views\categories\Edit.cshtml" />
     <Content Include="Areas\admin\Views\categories\Index.cshtml" />
-    <Content Include="Areas\admin\Content\pages\News\Create.cshtml" />
-    <Content Include="Areas\admin\Content\pages\News\Index.cshtml" />
     <Content Include="Areas\admin\Views\news\getNews.cshtml" />
     <Content Include="Areas\admin\Views\category_news\Create.cshtml" />
     <Content Include="Areas\admin\Views\category_news\Delete.cshtml" />
@@ -4781,6 +4783,16 @@
     <Content Include="Models\Model1.edmx.diagram">
       <DependentUpon>Model1.edmx</DependentUpon>
     </Content>
+    <Content Include="Areas\admin\Views\orders\Create.cshtml" />
+    <Content Include="Areas\admin\Views\orders\Delete.cshtml" />
+    <Content Include="Areas\admin\Views\orders\Details.cshtml" />
+    <Content Include="Areas\admin\Views\orders\Edit.cshtml" />
+    <Content Include="Areas\admin\Views\orders\Index.cshtml" />
+    <Content Include="Areas\admin\Views\orders_detail\Create.cshtml" />
+    <Content Include="Areas\admin\Views\orders_detail\Delete.cshtml" />
+    <Content Include="Areas\admin\Views\orders_detail\Details.cshtml" />
+    <Content Include="Areas\admin\Views\orders_detail\Edit.cshtml" />
+    <Content Include="Areas\admin\Views\orders_detail\Index.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -4887,7 +4899,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Areas\admin\Views\Category\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.rtl.min.css.map" />

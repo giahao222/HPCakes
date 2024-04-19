@@ -29,10 +29,11 @@ namespace HPCakes.Models
         public virtual DbSet<category_news> category_news { get; set; }
         public virtual DbSet<menu> menus { get; set; }
         public virtual DbSet<news> news { get; set; }
-        public virtual DbSet<order> orders { get; set; }
         public virtual DbSet<product> products { get; set; }
         public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
         public virtual DbSet<team> teams { get; set; }
         public virtual DbSet<contact_us> contact_us { get; set; }
+        public virtual DbSet<orders_detail> orders_detail { get; set; }
+        public virtual DbSet<order> orders { get; set; }
     }
 }

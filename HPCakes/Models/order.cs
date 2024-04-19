@@ -14,14 +14,23 @@ namespace HPCakes.Models
     
     public partial class order
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public order()
+        {
+            this.orders_detail = new HashSet<orders_detail>();
+        }
+    
         public int id { get; set; }
         public Nullable<System.DateTime> oderDate { get; set; }
         public string customerName { get; set; }
         public string productName { get; set; }
-        public Nullable<int> quantity { get; set; }
-        public Nullable<double> price { get; set; }
+        public string address { get; set; }
         public Nullable<double> totalAmount { get; set; }
         public string payment { get; set; }
         public Nullable<System.DateTime> lastUpdateDate { get; set; }
+        public string orderStatus { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<orders_detail> orders_detail { get; set; }
     }
 }

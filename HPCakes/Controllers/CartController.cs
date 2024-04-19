@@ -86,14 +86,14 @@ namespace HPCakes.Controllers
             return totalPrice - discountAmount;
         }
 
-        [HttpPost]
+       /* [HttpPost]
         public ActionResult CheckVoucher(string voucher)
         {
-            /*// Kiểm tra xem voucher có tồn tại trong cơ sở dữ liệu không
+            *//*// Kiểm tra xem voucher có tồn tại trong cơ sở dữ liệu không
             bool isVoucherValid = CheckVoucherInDatabase(voucher);
 
             // Trả về kết quả dưới dạng JSON
-            return Json(new { success = isVoucherValid });*/
+            return Json(new { success = isVoucherValid });*//*
 
             // Kiểm tra xem voucher có tồn tại trong cơ sở dữ liệu không
             var existingVoucher = _db.Vouchers.FirstOrDefault(v => v.Code == voucher);
@@ -124,7 +124,7 @@ namespace HPCakes.Controllers
             var check = _db.vouchers.FirstOrDefault(v => v.name == voucher);
             // Trả về true nếu voucher được tìm thấy, ngược lại trả về false
             return check != null;
-        }
+        }*/
 
 
     }
