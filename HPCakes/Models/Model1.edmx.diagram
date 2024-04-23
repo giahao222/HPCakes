@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="079a30f07f1440158e657ca2b339314f" Name="Diagram1" ZoomLevel="124">
+      <Diagram DiagramId="079a30f07f1440158e657ca2b339314f" Name="Diagram1" ZoomLevel="80">
         <EntityTypeShape EntityType="cakeshopModel.category" Width="1.5" PointX="0.75" PointY="1.5" IsExpanded="true" />
         <EntityTypeShape EntityType="cakeshopModel.category_news" Width="1.5" PointX="5.75" PointY="1.5" IsExpanded="true" />
         <EntityTypeShape EntityType="cakeshopModel.menu" Width="1.5" PointX="0.75" PointY="5.75" IsExpanded="true" />
@@ -19,7 +19,10 @@
         <AssociationConnector Association="cakeshopModel.FK_orders_detail_product" />
         <EntityTypeShape EntityType="cakeshopModel.order" Width="1.5" PointX="12.75" PointY="1.375" />
         <AssociationConnector Association="cakeshopModel.FK_orders_detail_orders" />
-      </Diagram>
+        <EntityTypeShape EntityType="cakeshopModel.news_comments" Width="1.5" PointX="11.125" PointY="4.875" />
+        <AssociationConnector Association="cakeshopModel.FK_news_comments_news" />
+        <AssociationConnector Association="cakeshopModel.FK_news_comments_news_comments" />
+        </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
 </edmx:Edmx>

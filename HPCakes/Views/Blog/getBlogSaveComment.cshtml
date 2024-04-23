@@ -1,0 +1,27 @@
+﻿@model HPCakes.Models.news_comments
+
+<div class="s_comment_area">
+    <h3 class="cm_title_br">Leave a Comment</h3>
+    <div class="s_comment_inner">
+        @using (Html.BeginForm("getBlogSaveComment", "Blog", FormMethod.Post, new { enctype = "multipart/form-data", @id = "contactForm", @class = "row contact_us_form" }))
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-group col-md-6">
+                @Html.TextBoxFor(model => model.username, new { @class = "form-control", placeholder = "Enter your name" })
+                @Html.ValidationMessageFor(model => model.username, "", new { @class = "text-danger" })
+            </div>
+            <div class="form-group col-md-6">
+                @Html.TextBoxFor(model => model.email, new { @class = "form-control", placeholder = "Enter your email address" })
+                @Html.ValidationMessageFor(model => model.email, "", new { @class = "text-danger" })
+            </div>
+            <div class="form-group col-md-12">
+                @Html.TextAreaFor(model => model.message, new { @class = "form-control", rows = "1", placeholder = "Write message" })
+                @Html.ValidationMessageFor(model => model.message, "", new { @class = "text-danger" })
+            </div>
+            <div class="form-group col-md-12">
+                <button type="submit" value="submit" class="btn order_s_btn form-control">Submit Now</button>
+            </div>
+        }
+    </div>
+</div>

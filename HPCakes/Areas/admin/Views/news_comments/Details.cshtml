@@ -1,82 +1,91 @@
-﻿@model HPCakes.Models.order
+﻿@model HPCakes.Models.news_comments
 
 @{
     ViewBag.Title = "Details";
     Layout = "~/Areas/admin/Views/Shared/_AdminLayout.cshtml";
 }
 
+
 <div id="page-wrapper">
     <div class="row">
         <div class="col-lg-12">
             <div class="panel panel-red">
                 <div class="panel-heading" style="background-color: #f195b2; border-color: #f195b2">
-                    Chi tiết Tin Tức
+                    Chi tiết Bình Luận
                 </div>
                 <!-- /.panel-heading -->
                 <div class="panel-body">
                     <dl class="dl-horizontal">
                         <dt>
-                            @Html.DisplayNameFor(model => model.oderDate)
+                            @Html.DisplayNameFor(model => model.username)
                         </dt>
 
                         <dd>
-                            @Html.DisplayFor(model => model.oderDate)
+                            @Html.DisplayFor(model => model.username)
                         </dd>
 
                         <dt>
-                            @Html.DisplayNameFor(model => model.customerName)
+                            @Html.DisplayNameFor(model => model.img)
                         </dt>
 
                         <dd>
-                            @Html.DisplayFor(model => model.customerName)
+                            @Html.DisplayFor(model => model.img)
                         </dd>
 
                         <dt>
-                            @Html.DisplayNameFor(model => model.productName)
+                            @Html.DisplayNameFor(model => model.email)
                         </dt>
 
                         <dd>
-                            @Html.DisplayFor(model => model.productName)
+                            @Html.DisplayFor(model => model.email)
                         </dd>
 
                         <dt>
-                            @Html.DisplayNameFor(model => model.address)
+                            @Html.DisplayNameFor(model => model.message)
                         </dt>
 
                         <dd>
-                            @Html.DisplayFor(model => model.address)
+                            @Html.DisplayFor(model => model.message)
                         </dd>
 
                         <dt>
-                            @Html.DisplayNameFor(model => model.totalAmount)
+                            @Html.DisplayNameFor(model => model.order)
                         </dt>
 
                         <dd>
-                            @Html.DisplayFor(model => model.totalAmount)
+                            @Html.DisplayFor(model => model.order)
                         </dd>
 
                         <dt>
-                            @Html.DisplayNameFor(model => model.payment)
+                            @Html.DisplayNameFor(model => model.hide)
                         </dt>
 
                         <dd>
-                            @Html.DisplayFor(model => model.payment)
+                            @Html.DisplayFor(model => model.hide)
                         </dd>
 
                         <dt>
-                            @Html.DisplayNameFor(model => model.lastUpdateDate)
+                            @Html.DisplayNameFor(model => model.datebegin)
                         </dt>
 
                         <dd>
-                            @Html.DisplayFor(model => model.lastUpdateDate)
+                            @Html.DisplayFor(model => model.datebegin)
                         </dd>
 
                         <dt>
-                            @Html.DisplayNameFor(model => model.orderStatus)
+                            @Html.DisplayNameFor(model => model.news.name)
                         </dt>
 
                         <dd>
-                            @Html.DisplayFor(model => model.orderStatus)
+                            @Html.DisplayFor(model => model.news.name)
+                        </dd>
+
+                        <dt>
+                            @Html.DisplayNameFor(model => model.news_comments2.username)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.news_comments2.username)
                         </dd>
 
                     </dl>

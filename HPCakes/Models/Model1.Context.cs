@@ -35,5 +35,6 @@ namespace HPCakes.Models
         public virtual DbSet<contact_us> contact_us { get; set; }
         public virtual DbSet<orders_detail> orders_detail { get; set; }
         public virtual DbSet<order> orders { get; set; }
+        public virtual DbSet<news_comments> news_comments { get; set; }
     }
 }

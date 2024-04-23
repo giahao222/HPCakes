@@ -1,0 +1,75 @@
+﻿@*<div class="s_comment_list">
+    <h3 class="cm_title_br">Comments</h3>
+    <div class="s_comment_list_inner">
+
+        @foreach (var item in Model)
+        {
+            <div class="media">
+                <div class="d-flex">
+                    <img src="~/img/@item.img" alt="">
+                </div>
+                <div class="media-body">
+                    <a href="#"><h4>@item.username</h4></a>
+                    <p>@item.message</p>
+                    <div class="date_rep">
+                        <a href="#">@item.datebegin</a>
+                        <a href="#">Reply</a>
+                    </div>
+                </div>
+            </div>
+        }
+
+    </div>
+</div>*@
+
+<div class="s_comment_list">
+    <h3 class="cm_title_br">Comments 4</h3>
+    <div class="s_comment_list_inner">
+
+        @foreach (var item in Model)
+        {
+            if (item.news_id == ViewBag.id) // Kiểm tra news_id của bình luận có khớp với id của tin tức hiện tại không
+            {
+                <div class="media">
+                    <div class="d-flex">
+                        <img src="~/img/@item.img" alt="">
+                    </div>
+                    <div class="media-body">
+                        <a href="#"><h4>@item.username</h4></a>
+                        <p>@item.message</p>
+                        <div class="date_rep">
+                            <a href="#">@item.datebegin</a>
+                            <a href="#">Reply</a>
+                        </div>
+                    </div>
+                </div>
+            }
+        }
+
+    </div>
+</div>
+
+
+
+@*
+    <div class="s_comment_area">
+        <h3 class="cm_title_br">Leave a Comment</h3>
+        <div class="s_comment_inner">
+            <form class="row contact_us_form" action="http://galaxyanalytics.net/demos/cake/theme/cake-html/contact_process.php" method="post" id="contactForm" novalidate="novalidate">
+                <div class="form-group col-md-6">
+                    <input type="text" class="form-control" id="name" name="name" placeholder="Enter your name">
+                </div>
+                <div class="form-group col-md-6">
+                    <input type="email" class="form-control" id="email" name="email" placeholder="Enter your email address">
+                </div>
+                <div class="form-group col-md-12">
+                    <textarea class="form-control" name="message" id="message" rows="1" placeholder="Wrtie message"></textarea>
+                </div>
+                <div class="form-group col-md-12">
+                    <button type="submit" value="submit" class="btn order_s_btn form-control">submit now</button>
+                </div>
+            </form>
+        </div>
+
+    </div>*@
+

@@ -12,28 +12,28 @@ namespace HPCakes.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class news
+    public partial class news_comments
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public news()
+        public news_comments()
         {
-            this.news_comments = new HashSet<news_comments>();
+            this.news_comments1 = new HashSet<news_comments>();
         }
     
         public int id { get; set; }
-        public Nullable<int> categoryid { get; set; }
-        public string name { get; set; }
+        public Nullable<int> news_id { get; set; }
+        public Nullable<int> reply_id { get; set; }
+        public string username { get; set; }
         public string img { get; set; }
-        public string description { get; set; }
-        public string link { get; set; }
-        public string detail { get; set; }
-        public string meta { get; set; }
-        public Nullable<bool> hide { get; set; }
+        public string email { get; set; }
+        public string message { get; set; }
         public Nullable<int> order { get; set; }
+        public Nullable<bool> hide { get; set; }
         public Nullable<System.DateTime> datebegin { get; set; }
     
-        public virtual category_news category_news { get; set; }
+        public virtual news news { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<news_comments> news_comments { get; set; }
+        public virtual ICollection<news_comments> news_comments1 { get; set; }
+        public virtual news_comments news_comments2 { get; set; }
     }
 }

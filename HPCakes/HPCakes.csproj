@@ -144,6 +144,7 @@
     <Compile Include="Areas\admin\Controllers\HomeController.cs" />
     <Compile Include="Areas\admin\Controllers\menusController.cs" />
     <Compile Include="Areas\admin\Controllers\newsController.cs" />
+    <Compile Include="Areas\admin\Controllers\news_commentsController.cs" />
     <Compile Include="Areas\admin\Controllers\ordersController.cs" />
     <Compile Include="Areas\admin\Controllers\orders_detailController.cs" />
     <Compile Include="Areas\admin\Controllers\productsController.cs" />
@@ -187,6 +188,9 @@
       <DependentUpon>Model1.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\news.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\news_comments.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\order.cs">
@@ -4793,6 +4797,11 @@
     <Content Include="Areas\admin\Views\orders_detail\Details.cshtml" />
     <Content Include="Areas\admin\Views\orders_detail\Edit.cshtml" />
     <Content Include="Areas\admin\Views\orders_detail\Index.cshtml" />
+    <Content Include="Areas\admin\Views\news_comments\Create.cshtml" />
+    <Content Include="Areas\admin\Views\news_comments\Delete.cshtml" />
+    <Content Include="Areas\admin\Views\news_comments\Details.cshtml" />
+    <Content Include="Areas\admin\Views\news_comments\Edit.cshtml" />
+    <Content Include="Areas\admin\Views\news_comments\Index.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -4896,6 +4905,8 @@
     <Content Include="Views\Blog\getBlogCate.cshtml" />
     <Content Include="Views\ContactUs\Index.cshtml" />
     <Content Include="Views\Payment\Index.cshtml" />
+    <Content Include="Views\Blog\getBlogComment.cshtml" />
+    <Content Include="Views\Blog\getBlogSaveComment.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

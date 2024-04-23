@@ -66,6 +66,21 @@ warning 6002: The table/view 'cakeshop.dbo.contact_us' does not have a primary k
           <Property Name="order" Type="int" />
           <Property Name="datebegin" Type="smalldatetime" />
         </EntityType>
+        <EntityType Name="news_comments">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="news_id" Type="int" />
+          <Property Name="reply_id" Type="int" />
+          <Property Name="username" Type="nvarchar" MaxLength="100" />
+          <Property Name="img" Type="nvarchar(max)" />
+          <Property Name="email" Type="nvarchar" MaxLength="100" />
+          <Property Name="message" Type="nvarchar(max)" />
+          <Property Name="order" Type="int" />
+          <Property Name="hide" Type="bit" />
+          <Property Name="datebegin" Type="smalldatetime" />
+        </EntityType>
         <EntityType Name="orders">
           <Key>
             <PropertyRef Name="id" />
@@ -147,6 +162,30 @@ warning 6002: The table/view 'cakeshop.dbo.contact_us' does not have a primary k
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_news_comments_news">
+          <End Role="news" Type="Self.news" Multiplicity="0..1" />
+          <End Role="news_comments" Type="Self.news_comments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="news">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="news_comments">
+              <PropertyRef Name="news_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_news_comments_news_comments">
+          <End Role="news_comments" Type="Self.news_comments" Multiplicity="0..1" />
+          <End Role="news_comments1" Type="Self.news_comments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="news_comments">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="news_comments1">
+              <PropertyRef Name="reply_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_orders_detail_orders">
           <End Role="orders" Type="Self.orders" Multiplicity="1" />
           <End Role="orders_detail" Type="Self.orders_detail" Multiplicity="*" />
@@ -188,6 +227,7 @@ warning 6002: The table/view 'cakeshop.dbo.contact_us' does not have a primary k
           <EntitySet Name="category_news" EntityType="Self.category_news" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="menu" EntityType="Self.menu" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="news" EntityType="Self.news" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="news_comments" EntityType="Self.news_comments" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="orders" EntityType="Self.orders" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="orders_detail" EntityType="Self.orders_detail" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="product" EntityType="Self.product" Schema="dbo" store:Type="Tables" />
@@ -203,6 +243,14 @@ warning 6002: The table/view 'cakeshop.dbo.contact_us' does not have a primary k
           <AssociationSet Name="FK_news_category_news" Association="Self.FK_news_category_news">
             <End Role="category_news" EntitySet="category_news" />
             <End Role="news" EntitySet="news" />
+          </AssociationSet>
+          <AssociationSet Name="FK_news_comments_news" Association="Self.FK_news_comments_news">
+            <End Role="news" EntitySet="news" />
+            <End Role="news_comments" EntitySet="news_comments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_news_comments_news_comments" Association="Self.FK_news_comments_news_comments">
+            <End Role="news_comments" EntitySet="news_comments" />
+            <End Role="news_comments1" EntitySet="news_comments" />
           </AssociationSet>
           <AssociationSet Name="FK_orders_detail_orders" Association="Self.FK_orders_detail_orders">
             <End Role="orders" EntitySet="orders" />
@@ -272,6 +320,7 @@ warning 6002: The table/view 'cakeshop.dbo.contact_us' does not have a primary k
           <Property Name="order" Type="Int32" />
           <Property Name="datebegin" Type="DateTime" Precision="0" />
           <NavigationProperty Name="category_news" Relationship="Self.FK_news_category_news" FromRole="news" ToRole="category_news" />
+          <NavigationProperty Name="news_comments" Relationship="cakeshopModel.FK_news_comments_news" FromRole="news" ToRole="news_comments" />
         </EntityType>
         <EntityType Name="product">
           <Key>
@@ -380,6 +429,15 @@ warning 6002: The table/view 'cakeshop.dbo.contact_us' does not have a primary k
             <End Role="order" EntitySet="orders" />
             <End Role="orders_detail" EntitySet="orders_detail" />
           </AssociationSet>
+          <EntitySet Name="news_comments" EntityType="cakeshopModel.news_comments" />
+          <AssociationSet Name="FK_news_comments_news" Association="cakeshopModel.FK_news_comments_news">
+            <End Role="news" EntitySet="news" />
+            <End Role="news_comments" EntitySet="news_comments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_news_comments_news_comments" Association="cakeshopModel.FK_news_comments_news_comments">
+            <End Role="news_comments" EntitySet="news_comments" />
+            <End Role="news_comments1" EntitySet="news_comments" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="orders_detail">
           <Key>
@@ -430,6 +488,48 @@ warning 6002: The table/view 'cakeshop.dbo.contact_us' does not have a primary k
             </Principal>
             <Dependent Role="orders_detail">
               <PropertyRef Name="order_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="news_comments">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="news_id" Type="Int32" />
+          <Property Name="reply_id" Type="Int32" />
+          <Property Name="username" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="img" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="email" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="message" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="order" Type="Int32" />
+          <Property Name="hide" Type="Boolean" />
+          <Property Name="datebegin" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="news" Relationship="cakeshopModel.FK_news_comments_news" FromRole="news_comments" ToRole="news" />
+          <NavigationProperty Name="news_comments1" Relationship="cakeshopModel.FK_news_comments_news_comments" FromRole="news_comments" ToRole="news_comments1" />
+          <NavigationProperty Name="news_comments2" Relationship="cakeshopModel.FK_news_comments_news_comments" FromRole="news_comments1" ToRole="news_comments" />
+        </EntityType>
+        <Association Name="FK_news_comments_news">
+          <End Type="cakeshopModel.news" Role="news" Multiplicity="0..1" />
+          <End Type="cakeshopModel.news_comments" Role="news_comments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="news">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="news_comments">
+              <PropertyRef Name="news_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_news_comments_news_comments">
+          <End Type="cakeshopModel.news_comments" Role="news_comments" Multiplicity="0..1" />
+          <End Type="cakeshopModel.news_comments" Role="news_comments1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="news_comments">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="news_comments1">
+              <PropertyRef Name="reply_id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -571,6 +671,22 @@ warning 6002: The table/view 'cakeshop.dbo.contact_us' does not have a primary k
                 <ScalarProperty Name="productName" ColumnName="productName" />
                 <ScalarProperty Name="customerName" ColumnName="customerName" />
                 <ScalarProperty Name="oderDate" ColumnName="oderDate" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="news_comments">
+            <EntityTypeMapping TypeName="cakeshopModel.news_comments">
+              <MappingFragment StoreEntitySet="news_comments">
+                <ScalarProperty Name="datebegin" ColumnName="datebegin" />
+                <ScalarProperty Name="hide" ColumnName="hide" />
+                <ScalarProperty Name="order" ColumnName="order" />
+                <ScalarProperty Name="message" ColumnName="message" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="img" ColumnName="img" />
+                <ScalarProperty Name="username" ColumnName="username" />
+                <ScalarProperty Name="reply_id" ColumnName="reply_id" />
+                <ScalarProperty Name="news_id" ColumnName="news_id" />
                 <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>
