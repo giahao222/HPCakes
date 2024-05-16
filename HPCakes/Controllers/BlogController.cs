@@ -55,8 +55,18 @@ namespace HPCakes.Controllers
 
         public ActionResult getBlogCate()
         {
-            ViewBag.meta = "tin-tuc";
+            ViewBag.meta = "san-pham";
             var v = from t in _db.categories
+                    where t.hide == true
+                    orderby t.order ascending
+                    select t;
+            return PartialView(v.ToList());
+        }
+
+        public ActionResult getRecentBlog()
+        {
+            ViewBag.meta = "tin-tuc";
+            var v = from t in _db.news
                     where t.hide == true
                     orderby t.order ascending
                     select t;

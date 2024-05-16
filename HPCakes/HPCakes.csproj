@@ -4907,6 +4907,7 @@
     <Content Include="Views\Payment\Index.cshtml" />
     <Content Include="Views\Blog\getBlogComment.cshtml" />
     <Content Include="Views\Blog\getBlogSaveComment.cshtml" />
+    <Content Include="Views\Blog\getRecentBlog.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

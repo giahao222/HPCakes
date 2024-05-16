@@ -30,7 +30,7 @@
                         <div class="blog_text">
                             <div class="blog_time">
                                 <div class="float-left">
-                                    <a href="#">08 Feb. 2018</a>
+                                    <a href="#">@Model.datebegin.ToString("dd/MM/yyyy")</a>
                                 </div>
                                 <div class="float-right">
                                     <ul class="list_style">
@@ -67,71 +67,12 @@
                         <div class="r_title">
                             <h3>Categories</h3>
                         </div>
-                        <ul class="list_style">
-                            <li><a href="#">Chocolates<i class="fa fa-angle-right" aria-hidden="true"></i></a></li>
-                            <li><a href="#">Summer Caket<i class="fa fa-angle-right" aria-hidden="true"></i></a></li>
-                            <li><a href="#">Ice Cream<i class="fa fa-angle-right" aria-hidden="true"></i></a></li>
-                            <li><a href="#">Lollipop<i class="fa fa-angle-right" aria-hidden="true"></i></a></li>
-                            <li><a href="#">Sweet<i class="fa fa-angle-right" aria-hidden="true"></i></a></li>
-                            <li><a href="#">Bakery<i class="fa fa-angle-right" aria-hidden="true"></i></a></li>
-                        </ul>
+                        @Html.Action("getBlogCate", "Blog")
                     </aside>
                     <aside class="r_widget recent_widget">
-                        <div class="r_title">
-                            <h3>Recent News</h3>
-                        </div>
-                        <div class="recent_w_inner">
-                            <div class="media">
-                                <div class="d-flex">
-                                    <img src="~/img/blog/recent-post/r-post-1.jpg" alt="">
-                                </div>
-                                <div class="media-body">
-                                    <a href="#"><h4>A very bad quack might jinx zippy fowls ...</h4></a>
-                                    <a href="#"><p>08 Feb 2018</p></a>
-                                </div>
-                            </div>
-                            <div class="media">
-                                <div class="d-flex">
-                                    <img src="~/img/blog/recent-post/r-post-2.jpg" alt="">
-                                </div>
-                                <div class="media-body">
-                                    <a href="#"><h4>Big Steps to change management succes...</h4></a>
-                                    <a href="#"><p>08 Feb 2018</p></a>
-                                </div>
-                            </div>
-                            <div class="media">
-                                <div class="d-flex">
-                                    <img src="~/img/blog/recent-post/r-post-3.jpg" alt="">
-                                </div>
-                                <div class="media-body">
-                                    <a href="#"><h4>A paradisematic country, where roasted parts...</h4></a>
-                                    <a href="#"><p>08 Feb 2018</p></a>
-                                </div>
-                            </div>
-                            <div class="media">
-                                <div class="d-flex">
-                                    <img src="~/img/blog/recent-post/r-post-4.jpg" alt="">
-                                </div>
-                                <div class="media-body">
-                                    <a href="#"><h4>A wonderful serenity has taken possession...</h4></a>
-                                    <a href="#"><p>08 Feb 2018</p></a>
-                                </div>
-                            </div>
-                        </div>
+                        @Html.Action("getRecentBlog", "Blog")
                     </aside>
-                    <aside class="r_widget tags_widget">
-                        <div class="r_title">
-                            <h3>Tags</h3>
-                        </div>
-                        <ul class="list_style">
-                            <li><a href="#">Baking Tips</a></li>
-                            <li><a href="#">Bakery</a></li>
-                            <li><a href="#">Recipe</a></li>
-                            <li><a href="#">Baking Tool</a></li>
-                            <li><a href="#">Cakes</a></li>
-                            <li><a href="#">Chocolates</a></li>
-                        </ul>
-                    </aside>
+                    
                 </div>
             </div>
         </div>
