@@ -51,6 +51,18 @@
         }
 </style>
 
+<nav aria-label="Page navigation example" class="blog_pagination">
+    <ul class="pagination">
+        @for (int i = 1; i <= Model.PageCount; i++)
+        {
+            <li class="page-item @(i == Model.PageNumber ? "active" : "")">
+                <a class="page-link" href="@Url.Action("Index", "Product", new { page = i })">@i</a>
+            </li>
+        }
+    </ul>
+</nav>
+
+@*
 <div class="pagination_format">
     Trang: @Html.PagedListPager(Model, page => Url.Action("Index", "Product", new { page }))
-</div>
+</div>*@
