@@ -43,8 +43,8 @@ namespace HPCakes.Controllers
                 {
                     bill newCart = new bill
                     {
-                        sessionID = sessionId,
-                        productId = sessionProduct.id,
+                        session_id = sessionId,
+                        product_id = sessionProduct.id,
                         name = sessionProduct.name,
                         price = sessionProduct.price,
                         quantity = item.Quantity,
