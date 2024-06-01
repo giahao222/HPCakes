@@ -198,6 +198,8 @@ namespace HPCakes.Controllers
                 _db.orders_detail.Add(newOrders_detail);
             }
 
+            _db.SaveChanges();
+
             return Json(new { success = true, message = "Thanh toán thành công." });
         }
 
