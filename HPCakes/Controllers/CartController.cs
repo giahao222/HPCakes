@@ -65,7 +65,7 @@ namespace HPCakes.Controllers
         {
             var sessionId = Session.SessionID;
             var v = from t in _db.bills
-                    where t.sessionID == sessionId
+                    where t.session_id == sessionId
                     select t;
             return PartialView(v.ToList());
         }
@@ -163,5 +163,44 @@ namespace HPCakes.Controllers
             public int Subtotal { get; set; }
             public int Total { get; set; }
         }
+
+        public ActionResult Orders(string Name, string Phone, string Address, int Total)
+        {
+            var sessionId = Session.SessionID;
+            
+            order newOrders = new order
+            {
+                customerName = Name,
+                totalAmount = Total,
+                address = Address,
+            };
+            _db.orders.Add(newOrders);
+
+            _db.SaveChanges();
+
+            var orders_id = _db.orders.OrderByDescending(o => o.id).FirstOrDefault().id;
+
+            var bills = _db.bills.Where(b => b.session_id == sessionId).ToList();
+            if (bills == null || !bills.Any())
+            {
+                return Json(new { success = false, message = "Không có hóa đơn nào cho session này." }, JsonRequestBehavior.AllowGet);
+            }
+
+            foreach (var b in bills)
+            {
+                orders_detail newOrders_detail = new orders_detail
+                {
+                    order_id = orders_id,
+                    product_id = b.product_id,
+                    quantity = b.quantity,
+                    price = b.price
+                };
+                _db.orders_detail.Add(newOrders_detail);
+            }
+
+            return Json(new { success = true, message = "Thanh toán thành công." });
+        }
+
+
     }
 }
