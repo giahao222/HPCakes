@@ -113,9 +113,9 @@ namespace HPCakes
             );
 
             routes.MapRoute(
-                "Payment",
+                "Bill",
                 "{type}/{meta}",
-                new { controller = "Payment", action = "Index", meta = UrlParameter.Optional },
+                new { controller = "Cart", action = "Bill", meta = UrlParameter.Optional },
                 new RouteValueDictionary {
                     {
                         "type","thanh-toan"

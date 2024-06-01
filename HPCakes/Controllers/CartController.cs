@@ -5,17 +5,69 @@ using System.Web;
 using System.Web.Mvc;
 using HPCakes.Models;
 using Microsoft.Ajax.Utilities;
+using static HPCakes.Controllers.CartController;
 
 namespace HPCakes.Controllers
 {
     public class CartController : Controller
     {
         cakeshopEntities _db = new cakeshopEntities();
+
         // GET: Cart
         public ActionResult Index()
         {
             List<product> cartItems = Session["CartItems"] as List<product> ?? new List<product>();
             return View(cartItems);
+        }
+
+        [HttpPost]
+        public ActionResult CheckOut(List<CartItem> cartItems)
+        {
+            if (cartItems == null || !cartItems.Any())
+            {
+                return Json(new { success = false, message = "Giỏ hàng trống." });
+            }
+
+            var sessionId = Session.SessionID;
+            List<product> sessionCartItems = Session["CartItems"] as List<product>;
+
+            if (sessionCartItems == null || !sessionCartItems.Any())
+            {
+                return Json(new { success = false, message = "Giỏ hàng trong session trống." });
+            }
+
+            foreach (var item in cartItems)
+            {
+                var sessionProduct = sessionCartItems.FirstOrDefault(p => p.id == item.ProductId);
+                if (sessionProduct != null)
+                {
+                    bill newCart = new bill
+                    {
+                        sessionID = sessionId,
+                        productId = sessionProduct.id,
+                        name = sessionProduct.name,
+                        price = sessionProduct.price,
+                        quantity = item.Quantity,
+                        voucher = item.Voucher,
+                        subtotal = item.Subtotal,
+                        total = item.Total
+                    };
+                    _db.bills.Add(newCart);
+                }
+            }
+
+            _db.SaveChanges();
+
+            return Json(new { success = true, message = "Thanh toán thành công." });
+        }
+
+        public ActionResult Bill()
+        {
+            var sessionId = Session.SessionID;
+            var v = from t in _db.bills
+                    where t.sessionID == sessionId
+                    select t;
+            return PartialView(v.ToList());
         }
 
         [HttpPost]
@@ -80,52 +132,36 @@ namespace HPCakes.Controllers
             return Json(new { success = true });
         }
 
-        private decimal CalculateDiscountedPrice(decimal totalPrice, int discountPercent)
-        {
-            decimal discountAmount = totalPrice * discountPercent / 100;
-            return totalPrice - discountAmount;
-        }
-
-       /* [HttpPost]
+        [HttpPost]
         public ActionResult CheckVoucher(string voucher)
         {
-            *//*// Kiểm tra xem voucher có tồn tại trong cơ sở dữ liệu không
-            bool isVoucherValid = CheckVoucherInDatabase(voucher);
-
-            // Trả về kết quả dưới dạng JSON
-            return Json(new { success = isVoucherValid });*//*
-
             // Kiểm tra xem voucher có tồn tại trong cơ sở dữ liệu không
-            var existingVoucher = _db.Vouchers.FirstOrDefault(v => v.Code == voucher);
+            var existingVoucher = _db.vouchers.FirstOrDefault(v => v.name == voucher);
 
             if (existingVoucher != null)
             {
-                // Nếu voucher tồn tại, lấy giá trị của cột value
-                int discountPercent = existingVoucher.Value;
-
-                // Lấy tổng tiền trước giảm giá từ session hoặc tính toán từ giỏ hàng
-                decimal totalPriceBeforeDiscount = CalculateTotalPriceBeforeDiscount();
-
-                // Tính toán giảm giá dựa trên tỷ lệ phần trăm và cập nhật tổng tiền cần thanh toán
-                decimal totalPriceAfterDiscount = CalculateDiscountedPrice(totalPriceBeforeDiscount, discountPercent);
-
-                // Trả về kết quả dưới dạng JSON
-                return Json(new { success = true, totalPriceAfterDiscount = totalPriceAfterDiscount });
+                // Trả về giá trị của voucher nếu voucher hợp lệ
+                return Json(new { success = true, voucherValue = existingVoucher.value });
             }
 
             // Trả về kết quả nếu voucher không hợp lệ
             return Json(new { success = false });
         }
 
-        private bool CheckVoucherInDatabase(string voucher)
+        // Action để lấy Session ID
+        public ActionResult SessionInfo()
         {
-            // Thực hiện kiểm tra voucher trong cơ sở dữ liệu ở đây
-            // Trả về true nếu voucher hợp lệ, ngược lại trả về false
-            var check = _db.vouchers.FirstOrDefault(v => v.name == voucher);
-            // Trả về true nếu voucher được tìm thấy, ngược lại trả về false
-            return check != null;
-        }*/
+            var sessionId = Session.SessionID;
+            return Content($"Session ID: {sessionId}");
+        }
 
-
+        public class CartItem
+        {
+            public int ProductId { get; set; }
+            public int Quantity { get; set; }
+            public int Voucher { get; set; }
+            public int Subtotal { get; set; }
+            public int Total { get; set; }
+        }
     }
 }

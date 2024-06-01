@@ -28,21 +28,6 @@
         //$(".total span").text(totalBeforeDiscount.toLocaleString('en-US') + " vnđ"); // Cập nhật tổng tiền cần thanh toán dựa trên tổng giá trị của sản phẩm
     }
 
-    // Xóa sản phẩm khỏi giỏ hàng
-    function removeFromCart(productId) {
-        $.ajax({
-            url: "/Cart/RemoveFromCart",
-            type: "POST",
-            data: { productId: productId },
-            success: function (response) {
-                location.reload();
-            },
-            error: function () {
-                alert("Error removing product from cart!");
-            }
-        });
-    }
-
     $(document).ready(function () {
         updateTotals();
         // Sự kiện khi số lượng sản phẩm thay đổi
@@ -60,7 +45,7 @@
 
         // Hàm cập nhật thành tiền của sản phẩm
         function updateTotalPrice(input) {
-            updateTotals();
+            /*updateTotals();*/
             var quantity = parseInt($(input).val() || "1");
             var priceString = $(input).closest("tr").find(".productPrice").text();
             var price = parseFloat(priceString.replace(" vnđ", "").replace(",", ""));
@@ -71,9 +56,14 @@
             updateTotals();
         }
     });
-////////////////////////////////////////////
-    $(document).ready(function() {
-        $('#useVoucherBtn').click(function() {
+    ////////////////////////////////////////////
+    $(document).ready(function () {
+        var voucherValue = 0;
+        var totalBeforeDiscount = 0;
+        var totalAfterDiscount = 0;
+
+        $('#useVoucherBtn').click(function (e) {
+            e.preventDefault(); // Ngăn chặn hành động mặc định của nút submit
             var voucher = $('#voucherInput').val(); // Lấy giá trị từ input voucher
 
             // Gửi yêu cầu AJAX
@@ -81,22 +71,76 @@
                 url: '/Cart/CheckVoucher', // Đường dẫn đến controller action để kiểm tra voucher
                 type: 'POST',
                 data: { voucher: voucher }, // Dữ liệu gửi đi: voucher
-                success: function(response) {
-                    // Xử lý kết quả trả về từ server
+                success: function (response) {
                     if (response.success) {
-                        alert('Voucher hợp lệ!');
-                        // Nếu voucher hợp lệ, bạn có thể thực hiện các hành động khác ở đây
+                        alert('Voucher hợp lệ! Hóa đơn được giảm: ' + response.voucherValue + '%');
+
+                        // Tính toán giảm giá và cập nhật tổng tiền cần thanh toán
+                        totalBeforeDiscount = parseFloat($(".sub_total span").text().replace(" vnđ", "").replace(",", ""));
+                        voucherValue = parseFloat(response.voucherValue); // Chuyển giá trị voucher về số
+                        var discount = totalBeforeDiscount * (voucherValue / 100);
+                        totalAfterDiscount = totalBeforeDiscount - discount;
+
+                        // Hiển thị tổng tiền cần thanh toán sau khi được giảm giá
+                        $(".total span").text(totalAfterDiscount.toLocaleString('en-US') + " vnđ");
                     } else {
                         alert('Voucher không hợp lệ!');
-                        // Nếu voucher không hợp lệ, bạn có thể thực hiện các hành động khác ở đây
                     }
-                },
-                error: function() {
-                    alert('Đã có lỗi xảy ra!');
                 }
             });
         });
+
+        $('.pest_btn').click(function (e) {
+            e.preventDefault();
+            var cartItems = [];
+            $("tr[data-product-id]").each(function () {
+                var productId = $(this).data("product-id");
+                var quantity = $(this).find(".productQuantity").val();
+                cartItems.push({
+                    ProductId: productId,
+                    Quantity: quantity,
+                    Voucher: voucherValue,
+                    Subtotal: totalBeforeDiscount,
+                    Total: totalAfterDiscount
+                });
+            });
+
+            $.ajax({
+                url: '/Cart/CheckOut',
+                type: 'POST',
+                contentType: 'application/json',
+                data: JSON.stringify(cartItems),
+                success: function (response) {
+                    if (response.success) {
+                        alert(response.message);
+                    } else {
+                        alert(response.message);
+                    }
+                },
+                error: function () {
+                    alert('Error during checkout process!');
+                }
+            });
+        });
+
     });
+    /////////////////////////////////////////////
+    // Xóa sản phẩm khỏi giỏ hàng
+    function removeFromCart(productId) {
+        $.ajax({
+            url: "/Cart/RemoveFromCart",
+            type: "POST",
+            data: { productId: productId },
+            success: function (response) {
+                location.reload();
+            },
+            error: function () {
+                alert("Error removing product from cart!");
+            }
+        });
+    }
+    ///////////////////////////
+
 </script>
 
 <!--================Cart Table Area =================-->
@@ -117,9 +161,9 @@
                 <tbody>
                     @foreach (var product in Model)
                     {
-                        <tr>
+                        <tr data-product-id="@product.id">
                             <td>
-                                <img src="~/img/@product.img" style="width: 150px; height: 150px; object-fit: cover; display: flex; justify-content: center;"/>
+                                <img src="~/img/@product.img" style="width: 150px; height: 150px; object-fit: cover; display: flex; justify-content: center;" />
                             </td>
                             <td>@product.name</td>
                             <td class="productPrice">@product.price vnđ</td>
@@ -150,10 +194,10 @@
                         <h5>Tổng tiền trước giảm giá<span></span></h5>
                     </div>
                     <div class="total">
-                        <h4>Tổng tiền cần thanh toán<span>$25.00</span></h4>
+                        <h4>Tổng tiền cần thanh toán<span></span></h4>
                     </div>
                     <div class="cart_footer">
-                        <a class="pest_btn" href="#">Tiến hành Thanh Toán</a>
+                        <button type="button" class="pest_btn">Tiến hành Thanh Toán</button>
                     </div>
                 </div>
             </div>
