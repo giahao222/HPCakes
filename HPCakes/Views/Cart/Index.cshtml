@@ -25,7 +25,7 @@
     function updateTotals() {
         var totalBeforeDiscount = calculateTotalPrice();
         $(".sub_total span").text(totalBeforeDiscount.toLocaleString('en-US') + " vnđ");
-        //$(".total span").text(totalBeforeDiscount.toLocaleString('en-US') + " vnđ"); // Cập nhật tổng tiền cần thanh toán dựa trên tổng giá trị của sản phẩm
+        $(".total span").text(totalBeforeDiscount.toLocaleString('en-US') + " vnđ"); // Cập nhật tổng tiền cần thanh toán dựa trên tổng giá trị của sản phẩm
     }
 
     $(document).ready(function () {
@@ -112,13 +112,13 @@
                 data: JSON.stringify(cartItems),
                 success: function (response) {
                     if (response.success) {
-                        alert(response.message);
+                        window.location.href = '/thanh-toan';
                     } else {
                         alert(response.message);
                     }
                 },
                 error: function () {
-                    alert('Error during checkout process!');
+                    alert('Đã xảy ra lỗi!');
                 }
             });
         });
