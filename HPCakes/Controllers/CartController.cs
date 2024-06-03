@@ -200,6 +200,13 @@ namespace HPCakes.Controllers
 
             _db.SaveChanges();
 
+            // Xóa các bills có session_id hiện tại
+            foreach (var b in bills)
+            {
+                _db.bills.Remove(b);
+            }
+            _db.SaveChanges();
+
             return Json(new { success = true, message = "Thanh toán thành công." });
         }
 
