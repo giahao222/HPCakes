@@ -65,9 +65,8 @@
                             <div class="card">
                                 <div class="card-header" id="headingTwo">
                                     <h5 class="mb-0">
-                                        <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                                            Thanh toán trực tiếp
-                                        </button>
+                                        <input type="radio" name="paymentMethod" value="direct" id="directPayment" />
+                                        <label for="directPayment">Thanh toán trực tiếp</label>
                                     </h5>
                                 </div>
                                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
@@ -76,18 +75,15 @@
                             <div class="card">
                                 <div class="card-header" id="headingThree">
                                     <h5 class="mb-0">
-                                        <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                                            Thanh toán trực tuyến
-                                        </button>
+                                        <input type="radio" name="paymentMethod" value="online" id="onlinePayment" />
+                                        <label for="onlinePayment">Thanh toán trực tuyến</label>
                                     </h5>
                                 </div>
                                 <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
-                                    @*<div class="card-body">
-                                    </div>*@
                                 </div>
                             </div>
                         </div>
-                        <button type="submit" id="submitBtn" class="btn pest_btn">Thanh toán</button>
+                        <button type="submit" id="submitBtn" class="btn pest_btn">Đặt hàng</button>
                     </div>
                 </div>
             </div>
@@ -97,7 +93,19 @@
 
 <script>
     $(document).ready(function() {
-        $('#submitBtn').click(function() {
+        $('#submitBtn').click(function () {
+            var selectedPaymentMethod = $('input[name="paymentMethod"]:checked').val();
+
+            if (!selectedPaymentMethod) {
+                alert('Vui lòng chọn phương thức thanh toán.');
+                return;
+            }
+
+            if (selectedPaymentMethod === 'online') {
+                alert('Chức năng hiện đang lỗi, mong quý khách thông cảm');
+                return;
+            }
+
             var formData = {
                 Name: $('#name').val(),
                 Phone: $('#phone').val(),
@@ -111,10 +119,10 @@
                 data: formData,
                 success: function(response) {
                     if (response.success) {
-                        alert('Thanh toán thành công.');
+                        alert('Đặt hàng thành công.');
                         // Redirect hoặc xử lý khác sau khi thanh toán thành công
                     } else {
-                        alert('Thanh toán thất bại: ' + response.message);
+                        alert('Đặt hàng thất bại: ' + response.message);
                     }
                 },
                 error: function() {
