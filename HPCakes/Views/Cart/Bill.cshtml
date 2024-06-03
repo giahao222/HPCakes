@@ -120,6 +120,7 @@
                 success: function(response) {
                     if (response.success) {
                         alert('Đặt hàng thành công.');
+                        window.location.href = '/trang-chu';
                         // Redirect hoặc xử lý khác sau khi thanh toán thành công
                     } else {
                         alert('Đặt hàng thất bại: ' + response.message);

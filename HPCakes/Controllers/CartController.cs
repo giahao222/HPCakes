@@ -17,6 +17,19 @@ namespace HPCakes.Controllers
         public ActionResult Index()
         {
             List<product> cartItems = Session["CartItems"] as List<product> ?? new List<product>();
+
+            var sessionId = Session.SessionID;
+
+            var bills = _db.bills.Where(b => b.session_id == sessionId).ToList();
+            // Xóa các bills có session_id hiện tại
+            if(bills != null) {
+                foreach (var b in bills)
+                {
+                    _db.bills.Remove(b);
+                }
+                _db.SaveChanges();
+            }
+            
             return View(cartItems);
         }
 
@@ -200,12 +213,15 @@ namespace HPCakes.Controllers
 
             _db.SaveChanges();
 
-            // Xóa các bills có session_id hiện tại
-            foreach (var b in bills)
+            List<product> cartItems = Session["CartItems"] as List<product>;
+
+            foreach (var cart in cartItems)
             {
-                _db.bills.Remove(b);
+                cartItems.Remove(cart);
             }
-            _db.SaveChanges();
+
+            // Cập nhật lại giỏ hàng trong Session
+            Session["CartItems"] = cartItems;
 
             return Json(new { success = true, message = "Thanh toán thành công." });
         }
