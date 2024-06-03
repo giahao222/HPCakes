@@ -214,10 +214,8 @@ namespace HPCakes.Controllers
             _db.SaveChanges();
 
             List<product> cartItems = Session["CartItems"] as List<product>;
-
-            foreach (var cart in cartItems)
-            {
-                cartItems.Remove(cart);
+            if(cartItems != null) {
+                cartItems = null;
             }
 
             // Cập nhật lại giỏ hàng trong Session
