@@ -26,7 +26,63 @@
             });
         });
     });
+
+    var slider = document.getElementById("myRange");
+    var output = document.getElementById("demo");
+    var min = document.getElementById("min-value");
+    var max = document.getElementById("max-value");
+
+    min.innerHTML = slider.min;
+    max.innerHTML = slider.value;
+
+    // Update the current slider value (each time you drag the slider handle)
+    slider.oninput = function () {
+        output.innerHTML = this.value;
+        max.innerHTML = this.value;
+    }
 </script>
+
+
+<style>
+    .slidecontainer {
+        width: 100%; /* Width of the outside container */
+    }
+
+    /* The slider itself */
+    .slider {
+        -webkit-appearance: none; /* Override default CSS styles */
+        appearance: none;
+        width: 100%; /* Full-width */
+        height: 25px; /* Specified height */
+        background: #d3d3d3; /* Grey background */
+        outline: none; /* Remove outline */
+        opacity: 0.7; /* Set transparency (for mouse-over effects on hover) */
+        -webkit-transition: .2s; /* 0.2 seconds transition on hover */
+        transition: opacity .2s;
+    }
+
+        /* Mouse-over effects */
+        .slider:hover {
+            opacity: 1; /* Fully shown on mouse-over */
+        }
+
+        /* The slider handle (use -webkit- (Chrome, Opera, Safari, Edge) and -moz- (Firefox) to override default look) */
+        .slider::-webkit-slider-thumb {
+            -webkit-appearance: none; /* Override default look */
+            appearance: none;
+            width: 25px; /* Set a specific slider handle width */
+            height: 25px; /* Slider handle height */
+            background: #04AA6D; /* Green background */
+            cursor: pointer; /* Cursor on hover */
+        }
+
+        .slider::-moz-range-thumb {
+            width: 25px; /* Set a specific slider handle width */
+            height: 25px; /* Slider handle height */
+            background: #04AA6D; /* Green background */
+            cursor: pointer; /* Cursor on hover */
+        }
+</style>
 
 <!--================End Main Header Area =================-->
 <section class="banner_area">
@@ -34,8 +90,8 @@
         <div class="banner_text">
             <h3>Shop</h3>
             <ul>
-                <li><a href="index.html">Home</a></li>
-                <li><a href="shop.html">Shop</a></li>
+                <li><a href="/trang-chu">Home</a></li>
+                <li><a href="/san-pham">Shop</a></li>
             </ul>
         </div>
     </div>
@@ -48,7 +104,7 @@
             <div class="col-lg-9">
                 <div class="row m0 product_task_bar">
                         <div class="product_task_inner">
-                            <div class="float-left">
+                            @*<div class="float-left">
                                 <a class="active" href="#"><i class="fa fa-th-large" aria-hidden="true"></i></a>
                                 <a href="#"><i class="fa fa-th-list" aria-hidden="true"></i></a>
                                 <span>Showing 1 - 10 of 55 results</span>
@@ -61,7 +117,7 @@
                                     <option value="2">Default</option>
                                     <option value="4">Default</option>
                                 </select>
-                            </div>
+                            </div>*@
                         </div>
                     </div>
                 @if (Model != null)
@@ -77,12 +133,12 @@
             <div class="col-lg-3">
                 <div class="product_left_sidebar">
                     <aside class="left_sidebar search_widget">
-                        <div class="input-group">
+                        @*<div class="input-group">
                             <input type="text" class="form-control" placeholder="Enter Search Keywords">
                             <div class="input-group-append">
                                 <button class="btn" type="button"><i class="icon icon-Search"></i></button>
                             </div>
-                        </div>
+                        </div>*@
                     </aside>
                     <aside class="left_sidebar p_catgories_widget">
                         <div class="p_w_title">
@@ -90,18 +146,18 @@
                         </div>
                         @Html.Action("getCategory", "Product")
                     </aside>
-                    <aside class="left_sidebar p_price_widget">
+                    @*<aside class="left_sidebar p_price_widget">
                         <div class="p_w_title">
                             <h3>Filter By Price</h3>
                         </div>
-                        <div class="filter_price">
-                            <div id="slider-range"></div>
-                            <label for="amount">Price range:</label>
-                            <input type="text" id="amount" readonly />
-                            <a href="#">Filter</a>
+                        <div class="slidecontainer">
+                            <input type="range" min="10000" max="10000000" value="1000" class="slider" id="myRange">
+                            <p>Min: <span id="min-value"></span></p>
+                            <p>Current: <span id="demo"></span></p>
+                            <p>Max: <span id="max-value"></span></p>
                         </div>
-                    </aside>
-                    <aside class="left_sidebar p_sale_widget">
+                    </aside>*@
+                    @*<aside class="left_sidebar p_sale_widget">
                         <div class="p_w_title">
                             <h3>Top Sale Products</h3>
                         </div>
@@ -121,7 +177,7 @@
                                 <h5>$29</h5>
                             </div>
                         </div>
-                    </aside>
+                    </aside>*@
                 </div>
             </div>
         </div>
