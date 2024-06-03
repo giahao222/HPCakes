@@ -59,8 +59,8 @@
     ////////////////////////////////////////////
     $(document).ready(function () {
         var voucherValue = 0;
-        var totalBeforeDiscount = 0;
-        var totalAfterDiscount = 0;
+        var totalBeforeDiscount = calculateTotalPrice();
+        var totalAfterDiscount = calculateTotalPrice();
 
         $('#useVoucherBtn').click(function (e) {
             e.preventDefault(); // Ngăn chặn hành động mặc định của nút submit
