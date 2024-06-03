@@ -76,9 +76,9 @@
                         alert('Voucher hợp lệ! Hóa đơn được giảm: ' + response.voucherValue + '%');
 
                         // Tính toán giảm giá và cập nhật tổng tiền cần thanh toán
-                        totalBeforeDiscount = parseFloat($(".sub_total span").text().replace(" vnđ", "").replace(",", ""));
+                        /*totalBeforeDiscount = parseFloat($(".sub_total span").text().replace(" vnđ", "").replace(",", ""));*/
                         voucherValue = parseFloat(response.voucherValue); // Chuyển giá trị voucher về số
-                        var discount = totalBeforeDiscount * (voucherValue / 100);
+                        var discount = totalBeforeDiscount * voucherValue / 100.0;
                         totalAfterDiscount = totalBeforeDiscount - discount;
 
                         // Hiển thị tổng tiền cần thanh toán sau khi được giảm giá
@@ -127,17 +127,19 @@
     /////////////////////////////////////////////
     // Xóa sản phẩm khỏi giỏ hàng
     function removeFromCart(productId) {
-        $.ajax({
-            url: "/Cart/RemoveFromCart",
-            type: "POST",
-            data: { productId: productId },
-            success: function (response) {
-                location.reload();
-            },
-            error: function () {
-                alert("Error removing product from cart!");
-            }
-        });
+        if (confirm("Bạn có chắc chắn muốn xóa sản phẩm này không?")) {
+            $.ajax({
+                url: "/Cart/RemoveFromCart",
+                type: "POST",
+                data: { productId: productId },
+                success: function (response) {
+                    location.reload();
+                },
+                error: function () {
+                    alert("Error removing product from cart!");
+                }
+            });
+        }
     }
     ///////////////////////////
 
